@@ -19,10 +19,18 @@ public class MovementComponent : MonoBehaviour
     // Components
     private PlayerController _playerController;
     private Rigidbody m_rb;
+    private Animator _playerAnimator;
 
     // References
     private Vector2 inputVector = Vector2.zero;         // Input Forward, Right
     private Vector3 moveDirection = Vector3.zero;       // Movement in 3 axis -> x, y, z
+
+    // Animator and animator hashes
+    [Header("Animation")]
+    public readonly int movementXHash = Animator.StringToHash("MovementX");
+    public readonly int movementYHash = Animator.StringToHash("MovementY");
+    public readonly int isJumpingHash = Animator.StringToHash("IsJumping");
+    public readonly int isRunningHash = Animator.StringToHash("IsRunning");
 
     /// <summary>
     /// Awake is before start, hence using it
@@ -31,6 +39,7 @@ public class MovementComponent : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         m_rb = GetComponent<Rigidbody>();
+        _playerAnimator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -69,6 +78,10 @@ public class MovementComponent : MonoBehaviour
     {
         // Update input vector from the InputValue
         inputVector = value.Get<Vector2>();
+
+        // Animation
+        _playerAnimator.SetFloat(movementXHash, inputVector.x);
+        _playerAnimator.SetFloat(movementYHash, inputVector.y);
     }
 
     /// <summary>
@@ -102,6 +115,9 @@ public class MovementComponent : MonoBehaviour
 
         // Impulse force upwards
         m_rb.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
+
+        // Animation
+        _playerAnimator.SetBool(isJumpingHash, _playerController.isJumping);
     }
 
 
@@ -117,6 +133,9 @@ public class MovementComponent : MonoBehaviour
 
             // Colliding with ground.. means not jumping
             _playerController.isJumping = false;
+
+            // set jumping animation to false
+            _playerAnimator.SetBool(isJumpingHash, false);
         }
     }
 }
