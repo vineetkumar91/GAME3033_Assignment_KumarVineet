@@ -96,6 +96,8 @@ public class MovementComponent : MonoBehaviour
             // update player controller bool from isPressed of InputValue
             _playerController.isRunning = value.isPressed;
         //}
+
+        _playerAnimator.SetBool(isRunningHash, _playerController.isRunning);
     }
 
     /// <summary>
