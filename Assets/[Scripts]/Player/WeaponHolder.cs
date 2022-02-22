@@ -47,6 +47,9 @@ public class WeaponHolder : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
 
+
+        PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
+
     }
 
     // Update is called once per frame
