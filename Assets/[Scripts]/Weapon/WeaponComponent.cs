@@ -95,6 +95,12 @@ public class WeaponComponent : MonoBehaviour
     {
         isFiring = false;
         CancelInvoke(nameof(FireWeapon));
+
+        // particle effect
+        if (firingEffect)
+        {
+            firingEffect.Stop();
+        }
     }
 
     protected virtual void FireWeapon()
@@ -110,6 +116,13 @@ public class WeaponComponent : MonoBehaviour
 
     private void ReloadWeapon()
     {
+        // Stop particle effects
+        // particle effect
+        if (firingEffect)
+        {
+            firingEffect.Stop();
+        }
+
         int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
 
         // less than 0

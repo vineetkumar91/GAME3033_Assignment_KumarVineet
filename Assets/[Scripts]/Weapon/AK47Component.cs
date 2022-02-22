@@ -24,10 +24,11 @@ public class AK47Component : WeaponComponent
         {
             base.FireWeapon();
 
-            // Particle effect
+            //--------- Particle effect ---------//
 
             if (firingEffect)
             {
+                //Debug.Log("Playing particles");
                 firingEffect.Play();
             }
 
@@ -45,7 +46,7 @@ public class AK47Component : WeaponComponent
                 Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1f);
             }
 
-            Debug.Log("Bullet Count = " + weaponStats.bulletsInClip);
+            //Debug.Log("Bullet Count = " + weaponStats.bulletsInClip);
 
         }
         else if (weaponStats.bulletsInClip <= 0)

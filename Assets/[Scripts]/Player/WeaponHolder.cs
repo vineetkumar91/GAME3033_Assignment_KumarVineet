@@ -24,7 +24,7 @@ public class WeaponHolder : MonoBehaviour
 
     private WeaponComponent equippedWeapon;
 
-    private bool wasFiring = false;
+    //private bool wasFiring = false;
     private bool firingPressed = false;
 
 
