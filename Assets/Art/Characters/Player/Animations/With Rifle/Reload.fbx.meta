@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 5bad5ad76aa7e3b47be5cba94b72ece8
+guid: c0e39204750b89447a86a9cd7ba1e5b6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Fire
+    second: ReloadRifle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,20 +35,20 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Fire
+      name: ReloadRifle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 8
+      lastFrame: 123
       wrapMode: 0
-      orientationOffsetY: -43
+      orientationOffsetY: -51
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
+      loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0

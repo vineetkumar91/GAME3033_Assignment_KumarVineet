@@ -24,6 +24,10 @@ public class MovementComponent : MonoBehaviour
     // References
     private Vector2 inputVector = Vector2.zero;         // Input Forward, Right
     private Vector3 moveDirection = Vector3.zero;       // Movement in 3 axis -> x, y, z
+    //*** Look
+    private Vector2 lookInput = Vector2.zero;
+    public float aimSensitivity = 1f;
+    public GameObject followTarget;
 
     // Animator and animator hashes
     [Header("Animation")]
@@ -51,6 +55,44 @@ public class MovementComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Aiming/Looking - animation taken care by the masks
+
+        // horizontal
+        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
+
+        // vertical
+        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
+
+        // clamp the rotation <- look for a better way using cinemachine
+        var angles = followTarget.transform.localEulerAngles;
+        angles.z = 0;
+
+        var angle = followTarget.transform.localEulerAngles.x;
+
+        // clamp values to be tweaked later as per requirement
+        if (angle > 180 && angle < 300)
+        {
+            angles.x = 300;
+        }
+        else if (angle < 180 && angle > 70)
+        {
+            angles.x = 70;
+        }
+
+        followTarget.transform.localEulerAngles = angles;
+
+        // rotate the player based on look
+        transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+
+        //followTarget.transform.localEulerAngles = Vector3.zero; <-- All angles 0 x should be angles.x
+        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0f, 0f);
+
+        // movement won't happen during jumping
+        if (_playerController.isJumping)
+        {
+            return;
+        }
+
         // if input vector magnitude is 0 or less, set to 0 : meaning we are not giving input
         if (!(inputVector.magnitude > 0))
         {
@@ -122,7 +164,28 @@ public class MovementComponent : MonoBehaviour
         _playerAnimator.SetBool(isJumpingHash, _playerController.isJumping);
     }
 
+    /// <summary>
+    /// Aim to look around with gun active
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnAim(InputValue value)
+    {
+        _playerController.isAiming = value.isPressed;
+    }
 
+    /// <summary>
+    /// On Look
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
+    }
+
+    /// <summary>
+    /// On Collision with other collision objects
+    /// </summary>
+    /// <param name="other"></param>
     private void OnCollisionEnter(Collision other)
     {
         // Compare tag of Grounded first
