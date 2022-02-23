@@ -105,6 +105,16 @@ public class WeaponComponent : MonoBehaviour
 
     protected virtual void FireWeapon()
     {
+
+        //--------- Particle effect ---------//
+
+        if (firingEffect)
+        {
+            //Debug.Log("Playing particles");
+            firingEffect.Play();
+        }
+
+        //---------
         weaponStats.bulletsInClip--;
     }
 

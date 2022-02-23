@@ -24,15 +24,7 @@ public class AK47Component : WeaponComponent
         {
             base.FireWeapon();
 
-            //--------- Particle effect ---------//
-
-            if (firingEffect)
-            {
-                //Debug.Log("Playing particles");
-                firingEffect.Play();
-            }
-
-            //---------
+            
 
             Ray screenRay = mainCamera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f));
 

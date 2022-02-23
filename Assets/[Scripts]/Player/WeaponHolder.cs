@@ -70,6 +70,14 @@ public class WeaponHolder : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
+
+        // fix
+        if (_playerController.isRunning)
+        {
+            StopFiring();
+            return;
+        }
+
         // Call the actual fire weapon from Weapon Holder here
         firingPressed = value.isPressed;
 
