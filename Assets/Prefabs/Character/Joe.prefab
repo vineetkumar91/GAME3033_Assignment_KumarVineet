@@ -2726,8 +2726,8 @@ MonoBehaviour:
   walkSpeed: 5
   sprintSpeed: 10
   jumpForce: 5
-  aimSensitivity: 1
-  followTarget: {fileID: 0}
+  aimSensitivity: 0.2
+  followTarget: {fileID: 914995817}
 --- !u!114 &8290529530213387954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,9 +2740,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16642af3ee2bca4490fbcc678b374b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponToSpawn: {fileID: 3894539172458970177, guid: e848f7e4d6b9072449dfa448d068ebbd, type: 3}
+  WeaponToSpawn: {fileID: 8469228583189824929, guid: 39abf3dfc4375aa4abf2d818a19913e6, type: 3}
   _playerController: {fileID: 0}
   WeaponScoketLocation: {fileID: 3001973868085136488}
+  GripIKScoketLocation: {fileID: 0}
 --- !u!1 &7987632701639464346
 GameObject:
   m_ObjectHideFlags: 0

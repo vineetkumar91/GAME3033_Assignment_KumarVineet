@@ -1186,6 +1186,7 @@ GameObject:
   - component: {fileID: 8831812697185991732}
   - component: {fileID: 3202281498417030734}
   - component: {fileID: 8712423903521727165}
+  - component: {fileID: 2078673790}
   m_Layer: 0
   m_Name: RabidCharger
   m_TagString: Untagged
@@ -1250,6 +1251,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2078673790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204211028502668942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d409dd98fea47b246a5639eba8ad4224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  isPatrolling: 0
 --- !u!1 &8324545405559330684
 GameObject:
   m_ObjectHideFlags: 0
