@@ -108,7 +108,14 @@ public class MovementComponent : MonoBehaviour
         aimAngle = (aimAngle > 180) ? aimAngle - 360 : aimAngle;
         float val = (aimAngle + offsetToZero) / (range);
         //print(val);
-        _playerAnimator.SetFloat(aimVerticalHash, val);
+
+        // Only valid if there is a weapon
+        if (GetComponent<WeaponHolder>().GetEquippedWeapon)
+        {
+            _playerAnimator.SetFloat(aimVerticalHash, val);
+        }
+
+        
 
 
         // Rotate the player based on look

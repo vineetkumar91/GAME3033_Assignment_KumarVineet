@@ -13,6 +13,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+public enum AnimatorOverrides
+{
+    WITHOUT_WEAPON,
+    WITH_WEAPON
+}
 public class WeaponHolder : MonoBehaviour
 {
     [Header("WeaponToSpawn"), SerializeField]
@@ -23,7 +29,7 @@ public class WeaponHolder : MonoBehaviour
 
     private Sprite crosshairImage;
 
-    private Animator animator;
+    public Animator animator;
     [SerializeField]
     private GameObject WeaponScoketLocation;
 
@@ -42,10 +48,15 @@ public class WeaponHolder : MonoBehaviour
     GameObject spawnedWeapon;
     public Dictionary<WeaponType, WeaponStats> weaponAmmoDictionary;
 
-    public WeaponComponent GetEquippedWeapon => equippedWeapon;
+    // Animator overrides
+    public AnimatorOverrideController[] jamesAnimatorOverrideControllers;
 
     [SerializeField]
     private WeaponScriptable startWeapon;
+
+    public WeaponComponent GetEquippedWeapon => equippedWeapon;
+
+    
 
 
     // Start is called before the first frame update
@@ -58,6 +69,8 @@ public class WeaponHolder : MonoBehaviour
         weaponAmmoDictionary = new Dictionary<WeaponType, WeaponStats>();
         _playerController = GetComponent<PlayerController>();
 
+        animator.runtimeAnimatorController = jamesAnimatorOverrideControllers[(int)AnimatorOverrides.WITHOUT_WEAPON];
+
         // 2nd Feb
         //equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
         //equippedWeapon.Initialize(this);
@@ -65,14 +78,14 @@ public class WeaponHolder : MonoBehaviour
         // Events...
         //PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
         /// Events
-         
+
 
         //GripIKScoketLocation = equippedWeapon.gripLocation;
-        
 
 
-        
-        _playerController.inventory.AddItem(startWeapon, 1);
+
+        // Adds Start Weapon        
+        //_playerController.inventory.AddItem(startWeapon, 1);
 
         weaponAmmoDictionary.Add(startWeapon.weaponStats.weaponType, startWeapon.weaponStats);
     }
@@ -220,7 +233,9 @@ public class WeaponHolder : MonoBehaviour
             equippedWeapon.weaponStats = weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType];
         }
 
-        Debug.Log("Equpping@");
+
+        // Set Animator override
+        animator.runtimeAnimatorController = jamesAnimatorOverrideControllers[(int)AnimatorOverrides.WITH_WEAPON];
 
         PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
     }
@@ -236,6 +251,9 @@ public class WeaponHolder : MonoBehaviour
         {
             weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType] = equippedWeapon.weaponStats;
         }
+
+        // Set Animator override
+        animator.runtimeAnimatorController = jamesAnimatorOverrideControllers[(int)AnimatorOverrides.WITHOUT_WEAPON];
 
         Destroy(equippedWeapon.gameObject);
         equippedWeapon = null;
