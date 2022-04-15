@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ItemCategory
 {
@@ -30,6 +31,8 @@ public abstract class ItemScript : ScriptableObject
     public event ItemDropped OnItemDropped;
 
     public int amountValue = 1;
+
+    public Sprite iconImage;
 
     public PlayerController controller { get; private set; }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = System.Object;
 
 public class IconSlot : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class IconSlot : MonoBehaviour
 
     [SerializeField] private ItemSlotAmountCanvas AmountWidget;
     [SerializeField] private ItemSlotEquippedCanvas EquippedWidget;
+    [SerializeField] private Image itemIconImage;
 
     void Awake()
     {
@@ -27,6 +29,9 @@ public class IconSlot : MonoBehaviour
         ItemText.text = Item.name;
         AmountWidget.Initialize(item);
         EquippedWidget.Initialize(item);
+
+        // Image
+        itemIconImage.sprite = item.iconImage;
 
         ItemButton.onClick.AddListener(UseItem);
         Item.OnItemDestroyed += OnItemDestroyed;

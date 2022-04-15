@@ -102,8 +102,14 @@ public class WeaponHolder : MonoBehaviour
     /// <param name="layerIndex"></param>
     private void OnAnimatorIK(int layerIndex)
     {
-        //animator.SetIKPositionWeight(AvatarIKGoal.LeftHand,1);
-        //animator.SetIKPosition(AvatarIKGoal.LeftHand, GripIKScoketLocation.transform.position);
+        if (equippedWeapon)
+        {
+            if (equippedWeapon.weaponStats.weaponName.Equals("AK-47"))
+            {
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                animator.SetIKPosition(AvatarIKGoal.LeftHand, equippedWeapon.gripLocation.position);
+            }
+        }
     }
 
     public void OnFire(InputValue value)
