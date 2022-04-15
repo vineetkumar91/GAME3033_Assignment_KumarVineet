@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -5,13 +6,19 @@ using UnityEngine;
 
 public class InventoryComponent : MonoBehaviour
 {
-    [SerializeField] private List<ItemScript> Items = new List<ItemScript>();
+    [SerializeField] private List<ItemScript> Items;
 
     private PlayerController Controller;
 
     private void Awake()
     {
         Controller = GetComponent<PlayerController>();
+        Items = new List<ItemScript>();
+    }
+
+    private void Start()
+    {
+       
     }
 
     public List<ItemScript> GetItemList() => Items;

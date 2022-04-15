@@ -93,6 +93,7 @@ public class ItemPickUp : MonoBehaviour
 
         if (itemInstance.itemCategory == ItemCategory.EQUIPMENT)
         {
+            Debug.Log("Got c4");
             GameManager.GetInstance().PromptUser("c4");
         }
 
