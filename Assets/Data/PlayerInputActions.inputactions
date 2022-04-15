@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "ObjectiveIncrementer",
+                    "type": "Button",
+                    "id": "02b6e700-68a3-4caf-a6cf-0cea87352e30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -200,6 +208,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb95bf1b-7512-4b08-b685-b5458803c5e6",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ObjectiveIncrementer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

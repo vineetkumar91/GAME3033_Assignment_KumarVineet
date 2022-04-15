@@ -65,7 +65,7 @@ public class MovementComponent : MonoBehaviour
     {
         // W06 - If inactive, then deactivate cursor (fire active on triggers when needed to the event)
         // Cursor
-        if (!GameManager.Instance.cursorActive)
+        if (!GameManager.GetInstance().cursorActive)
         {
             AppEvents.InvokeMouseCursorEnable(false);
         }
@@ -206,6 +206,12 @@ public class MovementComponent : MonoBehaviour
 
         // W06 Changes
         //_playerAnimator.SetFloat(aimVerticalHash,lookInput.y);
+    }
+
+    public void OnObjectiveIncrementer(InputValue value)
+    {
+        //GameManager.GetInstance().objectiveNumber++;
+        //ObjectiveManager.GetInstance().TriggerObjective(GameManager.GetInstance().objectiveNumber);
     }
 
     /// <summary>
