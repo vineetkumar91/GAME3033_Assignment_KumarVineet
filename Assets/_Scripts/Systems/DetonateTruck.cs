@@ -29,7 +29,7 @@ public class DetonateTruck : MonoBehaviour
         //GameManager.GetInstance().C4Equipment.DeleteC4Item(playerController);
         C4.SetActive(true);
         StartCoroutine(DetonationCoroutine());
-        ObjectiveManager.GetInstance().ActivateObjective(4);
+        ObjectiveManager.GetInstance().TriggerObjective(4);
         
     }
 
@@ -62,7 +62,7 @@ public class DetonateTruck : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<Rigidbody>().AddForce(forcePoint.up * ForceValue, ForceMode.Impulse);
 
-        ObjectiveManager.GetInstance().ActivateObjective(4);
+        ObjectiveManager.GetInstance().TriggerObjective(4);
 
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);

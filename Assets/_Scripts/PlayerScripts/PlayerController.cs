@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public GameUIController gameUIController;
     public HealthComponent healthComponent;
     public bool isInventoryOn = false;
+    public EquipmentScriptable c4ScriptableObject;
 
     private void Awake()
     {
@@ -65,6 +66,29 @@ public class PlayerController : MonoBehaviour
         if (GameManager.GetInstance().isReadyToPlant)
         {
             ObjectiveManager.GetInstance().PlantC4(this);
+        }
+    }
+    
+
+    /// <summary>
+    /// Backup
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnEquip(InputValue value)
+    {
+        if (ObjectiveManager.GetInstance().currentObjectiveNumber == 2)
+        {
+            if (!GameManager.GetInstance().isC4Equipped)
+            {
+                weaponHolder.EquipC4(c4ScriptableObject);
+                GameManager.GetInstance().isC4Equipped = true;
+            }
+            else
+            {
+                weaponHolder.UnEquipC4();
+                GameManager.GetInstance().isC4Equipped = false;
+                GameManager.GetInstance().isReadyToPlant = false;
+            }
         }
     }
 

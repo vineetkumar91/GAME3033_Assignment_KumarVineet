@@ -10,6 +10,7 @@ public class ObjectiveManager : MonoBehaviour
     public List<string> Objectives;
     public List<GameObject> ObjectiveTriggers;
     public GameObject Truck = null;
+    public int currentObjectiveNumber = 0;
 
     /// <summary>
     /// Singleton
@@ -32,6 +33,9 @@ public class ObjectiveManager : MonoBehaviour
     /// </summary>
     public void TriggerObjective(int objectiveNumber)
     {
+
+        currentObjectiveNumber = objectiveNumber;
+
         TMP_CurrentObjective.text = Objectives[objectiveNumber];
 
         switch (objectiveNumber)
