@@ -15,6 +15,7 @@ public class DetonateTruck : MonoBehaviour
 
     public float ForceValue = 200f;
     public bool isExecuteOnce = false;
+    public GameObject explosionParticleFX;
 
 
     /// <summary>
@@ -39,7 +40,8 @@ public class DetonateTruck : MonoBehaviour
     /// <returns></returns>
     IEnumerator DetonationCoroutine()
     {
-        Debug.Log("In Coroutine");
+
+        // Blinking light effect
         blinkingLight.color = Color.green;
         blinkingLight.intensity = 0;
         yield return new WaitForSeconds(delayForBlinking);
@@ -59,12 +61,19 @@ public class DetonateTruck : MonoBehaviour
         blinkingLight.intensity = 10;
         yield return new WaitForSeconds(delayForExplosion);
 
+        // Activate explosion
+        explosionParticleFX.SetActive(true);
+
+        // Activate physics
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<Rigidbody>().AddForce(forcePoint.up * ForceValue, ForceMode.Impulse);
-
+        
+        // Wait for 2 seconds before deactivating the explosion
+        yield return new WaitForSeconds(2f);
+        explosionParticleFX.SetActive(false);
+        
         ObjectiveManager.GetInstance().TriggerObjective(4);
-
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 }
