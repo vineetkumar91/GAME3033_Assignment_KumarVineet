@@ -79,12 +79,21 @@ public class ItemPickUp : MonoBehaviour
                 {
                     weaponHolder.GetEquippedWeapon.weaponStats = weaponHolder.weaponAmmoDictionary[tempWeaponStats.weaponType];
                 }
+
+                GameManager.GetInstance().PromptUser("ammo");
             }
             else
             {
                 weaponHolder.weaponAmmoDictionary.Add(tempWeaponData.weaponStats.weaponType, tempWeaponData.weaponStats);
+
+                GameManager.GetInstance().PromptUser("ak47");
             }
 
+        }
+
+        if (itemInstance.itemCategory == ItemCategory.EQUIPMENT)
+        {
+            GameManager.GetInstance().PromptUser("c4");
         }
 
         Destroy(gameObject);

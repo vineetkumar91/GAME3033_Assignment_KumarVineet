@@ -38,6 +38,8 @@ public class WeaponHolder : MonoBehaviour
     private Transform GripIKScoketLocation;
     private WeaponComponent equippedWeapon;
 
+    public GameObject C4;
+
     public readonly int isFiringHash = Animator.StringToHash("IsFiring");
     public readonly int isReloadingHash = Animator.StringToHash("IsReloading");
 
@@ -250,7 +252,7 @@ public class WeaponHolder : MonoBehaviour
     /// <summary>
     /// Unequip weapon
     /// </summary>
-    public void UnquipWeapon()
+    public void UnEquipWeapon()
     {
         if (!equippedWeapon) return;
         if (weaponAmmoDictionary.ContainsKey(equippedWeapon.weaponStats.weaponType))
@@ -264,4 +266,26 @@ public class WeaponHolder : MonoBehaviour
         Destroy(equippedWeapon.gameObject);
         equippedWeapon = null;
     }
+
+    /// <summary>
+    /// Equip C4
+    /// </summary>
+    /// <param name="weaponScriptable"></param>
+    public void EquipC4(EquipmentScriptable equipmentScriptable)
+    {
+        if (!equipmentScriptable) return;
+
+        C4.SetActive(true);
+    }
+
+    /// <summary>
+    /// Unequip C4
+    /// </summary>
+    public void UnEquipC4()
+    {
+        if (!C4.activeSelf) return;
+        
+        C4.SetActive(false);
+    }
+
 }

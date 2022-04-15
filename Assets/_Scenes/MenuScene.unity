@@ -344,7 +344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Zombie Endless Shooter
+  m_text: Triads of Hell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb86f3cb25953e1469eb04ce50386769, type: 2}
   m_sharedMaterial: {fileID: 429498335640602074, guid: fb86f3cb25953e1469eb04ce50386769, type: 2}

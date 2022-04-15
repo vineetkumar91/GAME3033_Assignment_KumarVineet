@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,24 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     // Lazy singleton for GM temporarily
     private static GameManager Instance;
 
+    [Header("Objectives")]
     public int objectiveNumber = 0;
+
+    [Header("Prompts")] 
+    public TextMeshProUGUI TMP_Prompts;
+
+    public Dictionary<string, string> promptsDictionary;
+    public List<string> promptKey;
+    public List<string> promptValue;
+    private bool isPromptOn = false;
+    private IEnumerator promptCoroutine;
+    public float promptDelay = 4f;
+    private string clear = "clear";
+
+    [Header("C4 Equipped")] 
+    public bool isC4Equipped = false;
+    public bool isReadyToPlant = false;
+    public EquipmentScriptable C4Equipment;
 
     public static GameManager GetInstance()
     {
@@ -22,8 +40,22 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     public void Awake()
     {
         Instance = this;
+        
+    }
 
+    private void Start()
+    {
         ObjectiveManager.GetInstance().TriggerObjective(objectiveNumber);
+
+        // Prompts
+        // Load dictionary
+        promptsDictionary = new Dictionary<string, string>();
+        for (int i = 0; i < promptKey.Count; i++)
+        {
+            promptsDictionary.Add(promptKey[i],promptValue[i]);
+        }
+
+        promptCoroutine = ShowPromptCoroutine(clear);
     }
 
     /// <summary>
@@ -63,6 +95,42 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     }
 
 
+    /// <summary>
+    /// Function to give prompts to user
+    /// </summary>
+    public void PromptUser(string key)
+    {
+        if (!isPromptOn)
+        {
+            isPromptOn = true;
+            promptCoroutine = ShowPromptCoroutine(key);
+            StartCoroutine(promptCoroutine);
+        }
+        else
+        {
+            isPromptOn = true;
+            StopCoroutine(promptCoroutine);
+            promptCoroutine = ShowPromptCoroutine(key);
+            StartCoroutine(promptCoroutine);
+        }
+    }
 
-    
+    /// <summary>
+    /// Coroutine of prompt
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    IEnumerator ShowPromptCoroutine(string key)
+    {
+        // display prompt
+        TMP_Prompts.text = promptsDictionary[key];
+
+        // delay
+        yield return new WaitForSeconds(promptDelay);
+
+        // clear
+        TMP_Prompts.text = promptsDictionary[clear];
+        StopCoroutine(promptCoroutine);
+        isPromptOn = false;
+    }
 }

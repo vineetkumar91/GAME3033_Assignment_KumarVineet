@@ -60,6 +60,14 @@ public class PlayerController : MonoBehaviour
         AppEvents.InvokeMouseCursorEnable(isInventoryOn);
     }
 
+    public void OnPlant(InputValue value)
+    {
+        if (GameManager.GetInstance().isReadyToPlant)
+        {
+            ObjectiveManager.GetInstance().PlantC4(this);
+        }
+    }
+
     //// Start is called before the first frame update
     //void Start()
     //{
