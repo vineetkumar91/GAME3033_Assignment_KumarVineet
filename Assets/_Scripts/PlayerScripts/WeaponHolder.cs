@@ -115,8 +115,13 @@ public class WeaponHolder : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
-        // Call the actual fire weapon from Weapon Holder here
+        if (GameManager.GetInstance().isPlayerDead)
+        {
+            StopFiring();
+            return;
+        }
 
+        // Call the actual fire weapon from Weapon Holder here
         firingPressed = value.isPressed;
         
 
@@ -134,14 +139,17 @@ public class WeaponHolder : MonoBehaviour
     // Reload
     public void OnReload(InputValue value)
     {
-        _playerController.isReloading = value.isPressed;
-        StartReloading();
+        if (!GameManager.GetInstance().isPlayerDead)
+        {
+            _playerController.isReloading = value.isPressed;
+            StartReloading();
+        }
+        
     }
 
     // Start Firing weapon
     private void StartFiring()
     {
-
         if (!equippedWeapon) return;
 
         if (equippedWeapon.weaponStats.bulletsInClip <= 0)
@@ -168,6 +176,11 @@ public class WeaponHolder : MonoBehaviour
     // Reload weapon
     public void StartReloading()
     {
+        if (GameManager.GetInstance().isPlayerDead)
+        {
+            return;
+        }
+
         if (!equippedWeapon) return;
 
         if (equippedWeapon.isReloading ||
@@ -275,6 +288,11 @@ public class WeaponHolder : MonoBehaviour
     /// <param name="weaponScriptable"></param>
     public void EquipC4(EquipmentScriptable equipmentScriptable)
     {
+        if (GameManager.GetInstance().isPlayerDead)
+        {
+            return;
+        }
+
         if (!equipmentScriptable) return;
 
         C4.SetActive(true);
@@ -287,9 +305,22 @@ public class WeaponHolder : MonoBehaviour
     /// </summary>
     public void UnEquipC4()
     {
+        if (GameManager.GetInstance().isPlayerDead)
+        {
+            return;
+        }
+
         if (!C4.activeSelf) return;
         
         C4.SetActive(false);
     }
 
+
+    /// <summary>
+    /// Player dead function for weapons
+    /// </summary>
+    public void PlayerIsDead()
+    {
+        StopFiring();
+    }
 }

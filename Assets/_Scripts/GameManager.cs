@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour //Singleton<GameManager>
 {
@@ -33,6 +35,11 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     public EquipmentScriptable C4Equipment;
 
     public bool isPaused = false;
+
+    [Header("Player")] 
+    public bool isPlayerDead = false;
+    public Image fadeToBlack;
+    public float duration = 2f;
 
     public static GameManager GetInstance()
     {
@@ -134,5 +141,28 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
         TMP_Prompts.text = promptsDictionary[clear];
         StopCoroutine(promptCoroutine);
         isPromptOn = false;
+    }
+
+    /// <summary>
+    /// Start fade to black
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator FadeToBlackCoroutine()
+    {
+
+        yield return new WaitForSeconds(2f);
+        float timer = 0.0f;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            fadeToBlack.color = new Color(fadeToBlack.color.r, fadeToBlack.color.g, fadeToBlack.color.b, Mathf.SmoothStep(0.0f, 1f, timer / duration));
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        fadeToBlack.color = new Color(fadeToBlack.color.r, fadeToBlack.color.g, fadeToBlack.color.b, 1f);
+
+        SceneManager.LoadScene(2);
     }
 }

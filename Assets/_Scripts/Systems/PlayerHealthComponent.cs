@@ -13,8 +13,10 @@ public class PlayerHealthComponent : HealthComponent
 
     public override void Destroy()
     {
+        GetComponent<MovementComponent>().PlayerIsDead();
+
         Debug.Log("Player is dead");
         Data.hasWon = false;
-        SceneManager.LoadScene(2);
+        //SceneManager.LoadScene(2);
     }
 }

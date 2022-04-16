@@ -43,6 +43,7 @@ public class MovementComponent : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MovementY");
     public readonly int isJumpingHash = Animator.StringToHash("IsJumping");
     public readonly int isRunningHash = Animator.StringToHash("IsRunning");
+    public readonly int isDeadHash = Animator.StringToHash("IsDead");
 
     // W06
     public readonly int aimVerticalHash = Animator.StringToHash("AimVertical");
@@ -74,7 +75,7 @@ public class MovementComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.GetInstance().isPaused)
+        if (!GameManager.GetInstance().isPaused && !GameManager.GetInstance().isPlayerDead)
         {
             // Aiming/Looking
             // if we aim up, down, adjust animations to have a mask that will let us properly animate Aim
@@ -118,8 +119,6 @@ public class MovementComponent : MonoBehaviour
             }
 
 
-
-
             // Rotate the player based on look
             transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
 
@@ -156,7 +155,7 @@ public class MovementComponent : MonoBehaviour
     /// </summary>
     public void OnMovement(InputValue value)
     {
-        if (!GameManager.GetInstance().isPaused)
+        if (!GameManager.GetInstance().isPaused && !GameManager.GetInstance().isPlayerDead)
         {
             inputVector = value.Get<Vector2>();
         }
@@ -185,7 +184,7 @@ public class MovementComponent : MonoBehaviour
     /// <param name="value"></param>
     public void OnJump(InputValue value)
     {
-        if (_playerController.isJumping || GameManager.GetInstance().isPaused)
+        if (_playerController.isJumping || GameManager.GetInstance().isPaused || GameManager.GetInstance().isPlayerDead)
         {
             return;
         }
@@ -206,7 +205,7 @@ public class MovementComponent : MonoBehaviour
 
     public void OnLook(InputValue value)
     {
-        if (!GameManager.GetInstance().isPaused && !_playerController.isInventoryOn)
+        if (!GameManager.GetInstance().isPaused && !_playerController.isInventoryOn && !GameManager.GetInstance().isPlayerDead)
         {
             lookInput = value.Get<Vector2>();
         }
@@ -224,6 +223,21 @@ public class MovementComponent : MonoBehaviour
     {
         //GameManager.GetInstance().objectiveNumber++;
         //ObjectiveManager.GetInstance().TriggerObjective(GameManager.GetInstance().objectiveNumber);
+    }
+
+    /// <summary>
+    /// Player death events
+    /// </summary>
+    public void PlayerIsDead()
+    {
+        if (!GameManager.GetInstance().isPlayerDead)
+        {
+            GameManager.GetInstance().isPlayerDead = true;
+            GetComponent<WeaponHolder>().PlayerIsDead();
+            _playerAnimator.SetBool(isDeadHash, true);
+            StartCoroutine(GameManager.GetInstance().FadeToBlackCoroutine());
+        }
+        
     }
 
     /// <summary>

@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnInventory(InputValue value)
     {
-        if (!GameManager.GetInstance().isPaused)
+        if (!GameManager.GetInstance().isPaused && !GameManager.GetInstance().isPlayerDead)
         {
             isInventoryOn = !isInventoryOn;
             gameUIController.ToggleInventory(isInventoryOn);
