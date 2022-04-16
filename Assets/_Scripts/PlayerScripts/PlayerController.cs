@@ -58,9 +58,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnInventory(InputValue value)
     {
-        isInventoryOn = !isInventoryOn;
-        gameUIController.ToggleInventory(isInventoryOn);
-        AppEvents.InvokeMouseCursorEnable(isInventoryOn);
+        if (!GameManager.GetInstance().isPaused)
+        {
+            isInventoryOn = !isInventoryOn;
+            gameUIController.ToggleInventory(isInventoryOn);
+            AppEvents.InvokeMouseCursorEnable(isInventoryOn);
+        }
     }
 
     public void OnPlant(InputValue value)

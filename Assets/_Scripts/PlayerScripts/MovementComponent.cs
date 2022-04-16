@@ -156,7 +156,11 @@ public class MovementComponent : MonoBehaviour
     /// </summary>
     public void OnMovement(InputValue value)
     {
-        inputVector = value.Get<Vector2>();
+        if (!GameManager.GetInstance().isPaused)
+        {
+            inputVector = value.Get<Vector2>();
+        }
+        
 
         // Animation
         _playerAnimator.SetFloat(movementXHash, inputVector.x);
@@ -181,7 +185,7 @@ public class MovementComponent : MonoBehaviour
     /// <param name="value"></param>
     public void OnJump(InputValue value)
     {
-        if (_playerController.isJumping)
+        if (_playerController.isJumping || GameManager.GetInstance().isPaused)
         {
             return;
         }
@@ -202,9 +206,13 @@ public class MovementComponent : MonoBehaviour
 
     public void OnLook(InputValue value)
     {
-        if (!GameManager.GetInstance().isPaused)
+        if (!GameManager.GetInstance().isPaused && !_playerController.isInventoryOn)
         {
             lookInput = value.Get<Vector2>();
+        }
+        else
+        {
+            lookInput = Vector2.zero;
         }
         
 
