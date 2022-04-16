@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ZombieComponent : MonoBehaviour
 {
-    public float zombieDamage = 5f;
+    public float zombieDamage = -5f;
 
     public NavMeshAgent zombieNavMesh;
     public Animator zombieAnimator;

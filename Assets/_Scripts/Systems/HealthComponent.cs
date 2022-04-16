@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour, IDamageable
 {
-    [SerializeField]
-    private float currentHealth;
-    public float CurrentHealth => currentHealth;
-
-    [SerializeField]
-    private float maxHealth;
-    public float MaxHealth => maxHealth;
+    
+    public float currentHealth;
+    public float maxHealth;
+    public float HPbeforeDamage;
+    public bool isUpdatingHPBar = false;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -32,7 +30,22 @@ public class HealthComponent : MonoBehaviour, IDamageable
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        UpdateHP(damage);
+    }
+
+    /// <summary>
+    /// Updates HP
+    /// </summary>
+    /// <param name="damage"></param>
+    public void UpdateHP(float damage)
+    {
+        HPbeforeDamage = currentHealth;
+
+        currentHealth += damage;
+
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        isUpdatingHPBar = true;
 
         if (currentHealth <= 0)
         {
