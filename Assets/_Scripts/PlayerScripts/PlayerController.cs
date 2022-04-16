@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 1f;
             GameManager.GetInstance().isPaused = false;
             PauseMenu.GetInstance().EnablePausePanel(false);
+
         }
 
         // Start Pause Panel

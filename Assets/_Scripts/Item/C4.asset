@@ -18,4 +18,4 @@ MonoBehaviour:
   isStackable: 0
   maxSize: 1
   amountValue: 1
-  iconImage: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  iconImage: {fileID: 21300000, guid: cf9ef07fec04e4d438652bd3b54aa04e, type: 3}
