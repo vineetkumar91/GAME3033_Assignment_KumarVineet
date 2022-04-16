@@ -49,11 +49,12 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Button_OnStartGamePressed()
     {
+        Data.Reset();
         SceneManager.LoadScene(1);
     }
 
     /// <summary>
-    /// Start game button
+    /// Instructions button
     /// </summary>
     public void Button_OnInstructionsPressed()
     {
@@ -63,7 +64,7 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Start game button
+    /// Credits button
     /// </summary>
     public void Button_OnCreditsPressed()
     {
@@ -73,7 +74,7 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Start game button
+    /// Exit button
     /// </summary>
     public void Button_OnExitPressed()
     {
