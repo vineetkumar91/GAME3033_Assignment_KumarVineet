@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponAmmoUI : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class WeaponAmmoUI : MonoBehaviour
     [SerializeField] 
     private WeaponComponent weaponComponent;
 
+    [Header("Ammo and C4 Panels")] 
+    public GameObject AmmoPanel;
+    public GameObject C4Panel;
+    public Color zeroAmmo;
+    public Color fullAmmo;
+
     [SerializeField]
     private TextMeshProUGUI TMP_slashSign;
 
@@ -26,13 +33,20 @@ public class WeaponAmmoUI : MonoBehaviour
     {
         // += :| wow.
         PlayerEvents.OnWeaponEquipped += OnWeaponEquipped;
+        PlayerEvents.OnC4Equipped += OnEquipC4;
+        PlayerEvents.OnUnequipWeapon += OnUnquipWeapons;
+
+        AmmoPanel.SetActive(false);
+        C4Panel.SetActive(false);
     }
 
     private void OnDestroy()
     {
         
-            PlayerEvents.OnWeaponEquipped -= OnWeaponEquipped;
-        
+        PlayerEvents.OnWeaponEquipped -= OnWeaponEquipped;
+        PlayerEvents.OnC4Equipped -= OnEquipC4;
+        PlayerEvents.OnUnequipWeapon -= OnUnquipWeapons;
+
     }
 
     /// <summary>
@@ -41,8 +55,9 @@ public class WeaponAmmoUI : MonoBehaviour
     /// <param name="_weaponComponent"></param>
     void OnWeaponEquipped(WeaponComponent _weaponComponent)
     {
-        Debug.Log("Something");
         weaponComponent = _weaponComponent;
+        AmmoPanel.SetActive(true);
+        C4Panel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,11 +67,32 @@ public class WeaponAmmoUI : MonoBehaviour
         {
             return;
         }
-       
-        
+
         TMP_weaponName.text = weaponComponent.weaponStats.weaponName;
         TMP_currentBullets.text = weaponComponent.weaponStats.bulletsInClip.ToString();
         TMP_totalBullets.text = weaponComponent.weaponStats.totalBullets.ToString();
-        
+
+        AmmoPanel.GetComponent<Image>().color = Color.Lerp(zeroAmmo, fullAmmo, (float)weaponComponent.weaponStats.bulletsInClip / (float)weaponComponent.weaponStats.clipSize);
+
+    }
+
+    /// <summary>
+    /// C4 Equipped function
+    /// </summary>
+    public void OnEquipC4()
+    {
+        TMP_weaponName.text = "C-4";
+        AmmoPanel.SetActive(false);
+        C4Panel.SetActive(true);
+    }
+
+    /// <summary>
+    /// Unequip weapon
+    /// </summary>
+    public void OnUnquipWeapons()
+    {
+        TMP_weaponName.text = "No Weapon Equipped";
+        AmmoPanel.SetActive(false);
+        C4Panel.SetActive(false);
     }
 }

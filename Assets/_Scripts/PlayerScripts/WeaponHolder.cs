@@ -55,7 +55,6 @@ public class WeaponHolder : MonoBehaviour
 
     [SerializeField]
     private WeaponScriptable startWeapon;
-
     public WeaponComponent GetEquippedWeapon => equippedWeapon;
 
     
@@ -265,6 +264,9 @@ public class WeaponHolder : MonoBehaviour
 
         Destroy(equippedWeapon.gameObject);
         equippedWeapon = null;
+
+        PlayerEvents.InvokeUnequipWeapon();
+
     }
 
     /// <summary>
@@ -276,6 +278,8 @@ public class WeaponHolder : MonoBehaviour
         if (!equipmentScriptable) return;
 
         C4.SetActive(true);
+
+        PlayerEvents.InvokeOnC4Equipped();
     }
 
     /// <summary>
