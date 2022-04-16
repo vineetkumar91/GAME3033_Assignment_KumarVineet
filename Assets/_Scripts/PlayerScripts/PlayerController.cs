@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public bool isInventoryOn = false;
     public EquipmentScriptable c4ScriptableObject;
 
+    
+
     private void Awake()
     {
         if (inventory == null)
@@ -90,6 +92,30 @@ public class PlayerController : MonoBehaviour
                 GameManager.GetInstance().isReadyToPlant = false;
             }
         }
+    }
+
+
+
+    /// <summary>
+    /// Pause state
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnPause(InputValue value)
+    {
+        if (!GameManager.GetInstance().isPaused)
+        {
+            Time.timeScale = 0f;
+            GameManager.GetInstance().isPaused = true;
+            PauseMenu.GetInstance().EnablePausePanel(true);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            GameManager.GetInstance().isPaused = false;
+            PauseMenu.GetInstance().EnablePausePanel(false);
+        }
+
+        // Start Pause Panel
     }
 
     //// Start is called before the first frame update

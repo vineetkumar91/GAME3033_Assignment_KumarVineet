@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     public bool isReadyToPlant = false;
     public EquipmentScriptable C4Equipment;
 
+    public bool isPaused = false;
+
     public static GameManager GetInstance()
     {
         return Instance;

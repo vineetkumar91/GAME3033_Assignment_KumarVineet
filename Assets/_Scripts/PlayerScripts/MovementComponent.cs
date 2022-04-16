@@ -74,81 +74,81 @@ public class MovementComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Aiming/Looking
-        // if we aim up, down, adjust animations to have a mask that will let us properly animate Aim
-        // horizontal
-        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
-
-        // vertical
-        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
-
-       // Clamp the rotation <- look for a better way using cinemachine
-        var angles = followTarget.transform.localEulerAngles;
-        angles.z = 0;
-
-        var angle = followTarget.transform.localEulerAngles.x;
-
-        if (angle > 180 && angle < 300)
+        if (!GameManager.GetInstance().isPaused)
         {
-            angles.x = 300;
+            // Aiming/Looking
+            // if we aim up, down, adjust animations to have a mask that will let us properly animate Aim
+            // horizontal
+            followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
+
+            // vertical
+            followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
+
+            // Clamp the rotation <- look for a better way using cinemachine
+            var angles = followTarget.transform.localEulerAngles;
+            angles.z = 0;
+
+            var angle = followTarget.transform.localEulerAngles.x;
+
+            if (angle > 180 && angle < 300)
+            {
+                angles.x = 300;
+            }
+            else if (angle < 180 && angle > 70)
+            {
+                angles.x = 70;
+            }
+
+            followTarget.transform.localEulerAngles = angles;
+
+            // Vertical Aim Fix****************************
+            float min = -60;
+            float max = 70.0f;
+            float range = max - min;
+            float offsetToZero = 0 - min;
+            float aimAngle = followTarget.transform.localEulerAngles.x;
+            aimAngle = (aimAngle > 180) ? aimAngle - 360 : aimAngle;
+            float val = (aimAngle + offsetToZero) / (range);
+            //print(val);
+
+            // Only valid if there is a weapon
+            if (GetComponent<WeaponHolder>().GetEquippedWeapon)
+            {
+                _playerAnimator.SetFloat(aimVerticalHash, val);
+            }
+
+
+
+
+            // Rotate the player based on look
+            transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+
+            // Bug fix for looking up and down
+            //followTarget.transform.localEulerAngles = Vector3.zero; <-- All angles 0 x should be angles.x
+            followTarget.transform.localEulerAngles = new Vector3(angles.x, 0f, 0f);
+
+            // movement won't happen during jumping
+            if (_playerController.isJumping)
+            {
+                return;
+            }
+
+            // if input vector magnitude is 0 or less,
+            if (!(inputVector.magnitude > 0))
+            {
+                moveDirection = Vector3.zero;
+            }
+
+            // get direction of movement with transforms forward and right
+            moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
+
+            // set current speed depending on running to walk or run speed
+            float currentSpeed = _playerController.isRunning ? runSpeed : walkSpeed;
+
+            // get movement direction and adjust position
+            Vector3 movementDirection = moveDirection * (currentSpeed * Time.deltaTime);
+            transform.position += movementDirection;
         }
-        else if (angle < 180 && angle > 70)
-        {
-            angles.x = 70;
-        }
-
-        followTarget.transform.localEulerAngles = angles;
-
-        // Vertical Aim Fix****************************
-        float min = -60;
-        float max = 70.0f;
-        float range = max - min;
-        float offsetToZero = 0 - min;
-        float aimAngle = followTarget.transform.localEulerAngles.x;
-        aimAngle = (aimAngle > 180) ? aimAngle - 360 : aimAngle;
-        float val = (aimAngle + offsetToZero) / (range);
-        //print(val);
-
-        // Only valid if there is a weapon
-        if (GetComponent<WeaponHolder>().GetEquippedWeapon)
-        {
-            _playerAnimator.SetFloat(aimVerticalHash, val);
-        }
-
-        
-
-
-        // Rotate the player based on look
-        transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-
-        // Bug fix for looking up and down
-        //followTarget.transform.localEulerAngles = Vector3.zero; <-- All angles 0 x should be angles.x
-        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0f, 0f);
-
-        // movement won't happen during jumping
-        if (_playerController.isJumping)
-        {
-            return;
-        }
-
-        // if input vector magnitude is 0 or less,
-        if (!(inputVector.magnitude > 0))
-        {
-            moveDirection = Vector3.zero;
-        }
-
-        // get direction of movement with transforms forward and right
-        moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
-
-        // set current speed depending on running to walk or run speed
-        float currentSpeed = _playerController.isRunning ? runSpeed : walkSpeed;
-
-        // get movement direction and adjust position
-        Vector3 movementDirection = moveDirection * (currentSpeed * Time.deltaTime);
-        transform.position += movementDirection;
-
-
-        
     }
 
     /// <summary>
@@ -202,7 +202,11 @@ public class MovementComponent : MonoBehaviour
 
     public void OnLook(InputValue value)
     {
-        lookInput = value.Get<Vector2>();
+        if (!GameManager.GetInstance().isPaused)
+        {
+            lookInput = value.Get<Vector2>();
+        }
+        
 
         // W06 Changes
         //_playerAnimator.SetFloat(aimVerticalHash,lookInput.y);
