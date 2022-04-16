@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 // 2nd Feb
@@ -34,6 +35,7 @@ public struct WeaponStats
     public LayerMask weaponHitLayers;
     public WeaponFiringPattern firingPattern;
     public int totalBullets;
+    public Image weaponIcon;
 }
 
 

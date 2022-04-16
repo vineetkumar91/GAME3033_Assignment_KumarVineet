@@ -30,7 +30,7 @@ public class DetonateTruck : MonoBehaviour
         //GameManager.GetInstance().C4Equipment.DeleteC4Item(playerController);
         C4.SetActive(true);
         StartCoroutine(DetonationCoroutine());
-        ObjectiveManager.GetInstance().TriggerObjective(4);
+        ObjectiveManager.GetInstance().TriggerObjective(3);
         
     }
 

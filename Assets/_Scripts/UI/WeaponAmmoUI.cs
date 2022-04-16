@@ -15,9 +15,11 @@ public class WeaponAmmoUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI TMP_totalBullets;
 
-
     [SerializeField] 
     private WeaponComponent weaponComponent;
+
+    [SerializeField]
+    private TextMeshProUGUI TMP_slashSign;
 
     // "All things should be perfectly balanced" - Nick Falsitta
     private void Start()
