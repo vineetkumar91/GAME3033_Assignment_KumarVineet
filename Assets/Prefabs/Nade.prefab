@@ -55,21 +55,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nade
       objectReference: {fileID: 0}
-    - target: {fileID: 8785524170819348238, guid: 2b690487b1fce9e459c5182946411787, type: 3}
-      propertyPath: weaponStats.damage
-      value: -200
+    - target: {fileID: 641157185930737245, guid: 2b690487b1fce9e459c5182946411787, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641157185930737245, guid: 2b690487b1fce9e459c5182946411787, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641157185930737245, guid: 2b690487b1fce9e459c5182946411787, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 641514704873439821, guid: 2b690487b1fce9e459c5182946411787, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 641624681627870059, guid: 2b690487b1fce9e459c5182946411787, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 729889815573089751, guid: 2b690487b1fce9e459c5182946411787, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785524170819348238, guid: 2b690487b1fce9e459c5182946411787, type: 3}
-      propertyPath: weaponStats.weaponName
-      value: Nade
-      objectReference: {fileID: 0}
+      propertyPath: explosionEffect
+      value: 
+      objectReference: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
     - target: {fileID: 8785524170819348238, guid: 2b690487b1fce9e459c5182946411787, type: 3}
-      propertyPath: weaponStats.weaponType
+      propertyPath: explosionRadius
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8785524170819348238, guid: 2b690487b1fce9e459c5182946411787, type: 3}
-      propertyPath: weaponStats.weaponHitLayers.m_Bits
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b690487b1fce9e459c5182946411787, type: 3}

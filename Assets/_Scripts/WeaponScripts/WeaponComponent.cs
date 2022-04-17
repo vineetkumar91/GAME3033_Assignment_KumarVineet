@@ -81,7 +81,7 @@ public class WeaponComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Ammo = " + weaponStats.bulletsInClip + weaponStats.totalBullets);
     }
 
     /// <summary>
@@ -201,5 +201,8 @@ public class WeaponComponent : MonoBehaviour
 
             weaponStats.totalBullets = 0;
         }
+
+        // BUG FIX for Ammo update using the weapon ammo dictionary
+        weaponHolder.weaponAmmoDictionary[weaponStats.weaponType] = weaponStats;
     }
 }

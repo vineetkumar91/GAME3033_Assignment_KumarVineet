@@ -9,10 +9,6 @@ public class Projectile : WeaponComponent
     public int damage;
     public bool destroyOnHit;
 
-    [Header("Effects")]
-    public GameObject muzzleEffect;
-    public GameObject hitEffect;
-
     [Header("Explosive Projectile")]
     public bool isExplosive;
     public float explosionRadius;
@@ -28,10 +24,6 @@ public class Projectile : WeaponComponent
     {
         // get rigidbody component
         rb = GetComponent<Rigidbody>();
-
-        // spawn muzzleEffect (if assigned)
-        if (muzzleEffect != null)
-            Instantiate(muzzleEffect, transform.position, Quaternion.identity);
     }
 
     private void OnCollisionEnter(Collision collision)
