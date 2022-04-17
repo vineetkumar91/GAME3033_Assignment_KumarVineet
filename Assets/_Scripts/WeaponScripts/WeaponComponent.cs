@@ -138,6 +138,9 @@ public class WeaponComponent : MonoBehaviour
     {
         //Debug.Log("Firing Weapon!!!");
         weaponStats.bulletsInClip--;
+        
+        // BUG FIX: can be costly, only use the dictionary during reloading
+        //weaponHolder.weaponAmmoDictionary[weaponStats.weaponType] = weaponStats;
     }
 
 
