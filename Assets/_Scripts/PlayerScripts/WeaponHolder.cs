@@ -88,7 +88,7 @@ public class WeaponHolder : MonoBehaviour
         // Adds Start Weapon        
         //_playerController.inventory.AddItem(startWeapon, 1);
 
-        weaponAmmoDictionary.Add(startWeapon.weaponStats.weaponType, startWeapon.weaponStats);
+        //weaponAmmoDictionary.Add(startWeapon.weaponStats.weaponType, startWeapon.weaponStats);
     }
 
     // Update is called once per frame
@@ -248,6 +248,7 @@ public class WeaponHolder : MonoBehaviour
         if (!equippedWeapon) return;
 
         equippedWeapon.Initialize(this, weaponScriptable);
+
         if (weaponAmmoDictionary.ContainsKey(equippedWeapon.weaponStats.weaponType))
         {
             equippedWeapon.weaponStats = weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType];
@@ -267,10 +268,13 @@ public class WeaponHolder : MonoBehaviour
     public void UnEquipWeapon()
     {
         if (!equippedWeapon) return;
+
+
         if (weaponAmmoDictionary.ContainsKey(equippedWeapon.weaponStats.weaponType))
         {
             weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType] = equippedWeapon.weaponStats;
         }
+
 
         // Set Animator override
         animator.runtimeAnimatorController = jamesAnimatorOverrideControllers[(int)AnimatorOverrides.WITHOUT_WEAPON];

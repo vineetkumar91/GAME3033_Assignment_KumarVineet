@@ -37,6 +37,7 @@ public struct WeaponStats
     public LayerMask weaponHitLayers;
     public WeaponFiringPattern firingPattern;
     public int totalBullets;
+    public int bulletsRemaining;
     public Image weaponIcon;
 }
 

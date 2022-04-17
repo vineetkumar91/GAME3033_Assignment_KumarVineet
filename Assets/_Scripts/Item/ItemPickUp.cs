@@ -74,6 +74,7 @@ public class ItemPickUp : MonoBehaviour
             {
                 WeaponStats tempWeaponStats = weaponHolder.weaponAmmoDictionary[tempWeaponData.weaponStats.weaponType];
                 tempWeaponStats.totalBullets += itemInstance.amountValue;
+
                 weaponHolder.weaponAmmoDictionary[tempWeaponData.weaponStats.weaponType] = tempWeaponStats;
                 if (weaponHolder.GetEquippedWeapon != null)
                 {
