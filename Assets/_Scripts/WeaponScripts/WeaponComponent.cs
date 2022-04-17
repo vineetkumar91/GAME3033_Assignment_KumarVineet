@@ -10,7 +10,9 @@ public enum WeaponType
 {
     None,
     Pistol,
-    MachineGun
+    MachineGun,
+    Launcher,
+    TOTAL_TYPES
 }
 
 public enum WeaponFiringPattern

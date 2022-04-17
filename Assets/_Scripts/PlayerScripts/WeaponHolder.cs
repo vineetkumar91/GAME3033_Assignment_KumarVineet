@@ -31,7 +31,7 @@ public class WeaponHolder : MonoBehaviour
 
     public Animator animator;
     [SerializeField]
-    private GameObject WeaponScoketLocation;
+    private GameObject WeaponSocketLocation;
 
     // 2nd Feb
     [SerializeField]
@@ -63,8 +63,8 @@ public class WeaponHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       //spawnedWeapon = Instantiate(WeaponToSpawn, WeaponScoketLocation.transform.position,
-       //    WeaponScoketLocation.transform.rotation, WeaponScoketLocation.transform);
+       //spawnedWeapon = Instantiate(WeaponToSpawn, WeaponSocketLocation.transform.position,
+       //    WeaponSocketLocation.transform.rotation, WeaponSocketLocation.transform);
 
         animator = GetComponent<Animator>();
         weaponAmmoDictionary = new Dictionary<WeaponType, WeaponStats>();
@@ -239,7 +239,7 @@ public class WeaponHolder : MonoBehaviour
     {
         if (!weaponScriptable) return;
 
-        spawnedWeapon = Instantiate(weaponScriptable.itemPrefab, WeaponScoketLocation.transform.position, WeaponScoketLocation.transform.rotation, WeaponScoketLocation.transform);
+        spawnedWeapon = Instantiate(weaponScriptable.itemPrefab, WeaponSocketLocation.transform.position, WeaponSocketLocation.transform.rotation, WeaponSocketLocation.transform);
 
         if (!spawnedWeapon) return;
 
