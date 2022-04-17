@@ -62,6 +62,10 @@ public class WeaponComponent : MonoBehaviour
     protected ParticleSystem firingEffect;
     protected Transform firingEffectLocation;
 
+    [Header("Enemy FX")]
+    [SerializeField]
+    protected GameObject bloodEffect;
+
     // Start is called before the first frame update
     void Start()
     {

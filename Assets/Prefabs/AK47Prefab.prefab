@@ -65,6 +65,7 @@ MonoBehaviour:
   isFiring: 0
   isReloading: 0
   firingEffect: {fileID: 2363796402071256222}
+  bloodEffect: {fileID: 4109168631494620022, guid: 61b1d922c1ac90a4aa8ed0df836814b1, type: 3}
 --- !u!1 &6139447797843282788
 GameObject:
   m_ObjectHideFlags: 0

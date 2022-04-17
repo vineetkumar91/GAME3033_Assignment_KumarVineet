@@ -6,10 +6,9 @@ using UnityEngine;
 public class AK47Component : WeaponComponent
 {
     Vector3 hitLocation;
+    private GameObject splash;
     protected override void FireWeapon()
     {
-        
-
         if (weaponStats.bulletsInClip > 0 && !isReloading && !weaponHolder._playerController.isRunning)
         {
             base.FireWeapon();
@@ -50,6 +49,12 @@ public class AK47Component : WeaponComponent
     {
         IDamageable damageable = hitInfo.collider.gameObject.GetComponent<IDamageable>();
         damageable?.TakeDamage(weaponStats.damage);
+
+        if (hitInfo.collider.gameObject.GetComponent<ZombieComponent>())
+        {
+            splash = Instantiate(bloodEffect, hitLocation, Quaternion.identity);
+            splash.GetComponent<ParticleSystem>().Play();
+        }
     }
 
     private void OnDrawGizmos()
