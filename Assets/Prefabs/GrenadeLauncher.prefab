@@ -90,10 +90,15 @@ MonoBehaviour:
       m_Bits: 4294967295
     firingPattern: 0
     totalBullets: 8
+    bulletsRemaining: 0
     weaponIcon: {fileID: 0}
   isFiring: 0
   isReloading: 0
   firingEffect: {fileID: 6025244142329303931}
+  muzzlePointSocket: {fileID: 1749201039467543516}
+  Nade: {fileID: 9073999123115168368, guid: 7fb6ae11c4864b54f966d232d888fdcb, type: 3}
+  ProjectileForce: 20
+  ProjectileUpwardForce: 5
 --- !u!1 &4442122611566506718
 GameObject:
   m_ObjectHideFlags: 0

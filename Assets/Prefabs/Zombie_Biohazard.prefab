@@ -4119,6 +4119,7 @@ GameObject:
   - component: {fileID: 3886728787229187478}
   - component: {fileID: 3795325512710058352}
   - component: {fileID: 3890965238337665859}
+  - component: {fileID: -1973372661981876776}
   - component: {fileID: 8640092592775039357}
   - component: {fileID: 3890965238337665860}
   - component: {fileID: 3890965238337665861}
@@ -4208,7 +4209,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 2017403faae04db48a19de7e979ade14, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -4236,6 +4237,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &-1973372661981876776
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889550506168992854}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!136 &8640092592775039357
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4246,7 +4263,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.28
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -4267,6 +4284,8 @@ MonoBehaviour:
   zombieAnimator: {fileID: 0}
   zombieStateMachine: {fileID: 0}
   followTarget: {fileID: 0}
+  m_rb: {fileID: 0}
+  isTakingDamage: 0
 --- !u!114 &3890965238337665861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4293,6 +4312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 150
   maxHealth: 150
+  HPbeforeDamage: 0
+  isUpdatingHPBar: 0
 --- !u!1 &3889560742316602824
 GameObject:
   m_ObjectHideFlags: 0

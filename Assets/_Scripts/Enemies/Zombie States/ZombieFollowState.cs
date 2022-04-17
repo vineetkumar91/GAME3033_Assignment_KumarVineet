@@ -7,25 +7,34 @@ public class ZombieFollowState : ZombieStates
     private GameObject followTarget;
     private const float stoppingDistance = 1;
     private int movementZHash = Animator.StringToHash("MovementZ");
-    
+
     public ZombieFollowState(GameObject _followTarget, ZombieComponent zombie, ZombieStateMachine zombieStateMachine) : base(zombie, zombieStateMachine)
     {
         followTarget = _followTarget;
         UpdateInterval = 2f;
-
     }
 
 
     public override void Start()
     {
         base.Start();
-        ownerZombie.zombieNavMesh.SetDestination(followTarget.transform.position);
+
+        if (!ownerZombie.isTakingDamage)
+        {
+            ownerZombie.zombieNavMesh.SetDestination(followTarget.transform.position);
+        }
+        
     }
 
     public override void IntervalUpdate()
     {
         base.IntervalUpdate();
-        ownerZombie.zombieNavMesh.SetDestination(followTarget.transform.position);
+
+        
+        if (!ownerZombie.isTakingDamage)
+        {
+            ownerZombie.zombieNavMesh.SetDestination(followTarget.transform.position);
+        }
     }
 
 

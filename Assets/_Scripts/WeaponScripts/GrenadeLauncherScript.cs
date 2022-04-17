@@ -5,6 +5,14 @@ using UnityEngine;
 public class GrenadeLauncherScript : WeaponComponent
 {
     Vector3 hitLocation;
+
+    [Header("Nade and its Launch Point")]
+    public Transform muzzlePointSocket;
+    public GameObject Nade;
+
+    [Header("Physics")]
+    public float ProjectileForce;
+    public float ProjectileUpwardForce;
     protected override void FireWeapon()
     {
         if (weaponStats.bulletsInClip > 0 && !isReloading && !weaponHolder._playerController.isRunning)
@@ -20,23 +28,25 @@ public class GrenadeLauncherScript : WeaponComponent
 
             //---------
 
-            Debug.Log("Firing nades");
+            GameObject projectile = Instantiate(Nade, muzzlePointSocket.position, mainCamera.transform.rotation);
 
-            //Ray screenRay = mainCamera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f));
-            //
-            //// fix. put everything in the actual if condition
-            //if (Physics.Raycast(screenRay, out RaycastHit hit, weaponStats.fireDistance, weaponStats.weaponHitLayers))
-            //{
-            //    hitLocation = hit.point;
-            //
-            //    DealDamage(hit);
-            //
-            //    Vector3 hitDirection = hit.point - mainCamera.transform.position;
-            //
-            //    //Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1f);
-            //}
+            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
 
-            //Debug.Log("Bullet Count = " + weaponStats.bulletsInClip);
+            Vector3 forceDirection = mainCamera.transform.forward;
+
+            Ray screenRay = mainCamera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f));
+
+            if (Physics.Raycast(screenRay, out RaycastHit hit, weaponStats.fireDistance))
+            {
+                hitLocation = hit.point;
+
+                Vector3 hitDirection = (hit.point - mainCamera.transform.position).normalized;
+
+                Vector3 forceToAdd = hitDirection * ProjectileForce + mainCamera.transform.up * ProjectileUpwardForce;
+
+                projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
+
+            }
 
         }
         else if (weaponStats.bulletsInClip <= 0)

@@ -13,8 +13,13 @@ public class ZombieIdleState : ZombieStates
     public override void Start()
     {
         base.Start();
-        ownerZombie.zombieNavMesh.isStopped = true;
-        ownerZombie.zombieNavMesh.ResetPath();
+
+        if (ownerZombie.zombieNavMesh.enabled)
+        {
+            ownerZombie.zombieNavMesh.isStopped = true;
+            ownerZombie.zombieNavMesh.ResetPath();
+        }
+
 
         ownerZombie.zombieAnimator.SetFloat(movementZHash, 0);
     }
@@ -22,6 +27,9 @@ public class ZombieIdleState : ZombieStates
     public override void Exit()
     {
         base.Exit();
-        ownerZombie.zombieNavMesh.isStopped = false;
+        if (ownerZombie.zombieNavMesh.enabled)
+        {
+            ownerZombie.zombieNavMesh.isStopped = false;
+        }
     }
 }

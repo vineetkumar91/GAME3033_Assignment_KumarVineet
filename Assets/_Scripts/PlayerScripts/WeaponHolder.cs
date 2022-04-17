@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public enum AnimatorOverrides
@@ -57,6 +58,11 @@ public class WeaponHolder : MonoBehaviour
     private WeaponScriptable startWeapon;
     public WeaponComponent GetEquippedWeapon => equippedWeapon;
 
+    [Header("Crosshair")] 
+    public Image Crosshair;
+    public Sprite AK47CrossHair;
+    public Sprite NadeCrossHair;
+    public Sprite EmptyCrossHair;
     
 
 
@@ -71,6 +77,8 @@ public class WeaponHolder : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
 
         animator.runtimeAnimatorController = jamesAnimatorOverrideControllers[(int)AnimatorOverrides.WITHOUT_WEAPON];
+
+        Crosshair.sprite = EmptyCrossHair;
 
         // 2nd Feb
         //equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
@@ -254,6 +262,22 @@ public class WeaponHolder : MonoBehaviour
             equippedWeapon.weaponStats = weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType];
         }
 
+        // Switch crosshair with that
+        switch (equippedWeapon.weaponStats.weaponType)
+        {
+            case WeaponType.MachineGun:
+                Crosshair.sprite = AK47CrossHair;
+                break;
+
+            case WeaponType.Launcher:
+                Crosshair.sprite = NadeCrossHair;
+                break;
+
+            default:
+                Crosshair.sprite = EmptyCrossHair;
+                break;
+        }
+
 
         // Set Animator override
         animator.runtimeAnimatorController = jamesAnimatorOverrideControllers[(int)AnimatorOverrides.WITH_WEAPON];
@@ -281,6 +305,10 @@ public class WeaponHolder : MonoBehaviour
 
         Destroy(equippedWeapon.gameObject);
         equippedWeapon = null;
+
+
+        // Crosshair remove
+        Crosshair.sprite = EmptyCrossHair;
 
         PlayerEvents.InvokeUnequipWeapon();
 

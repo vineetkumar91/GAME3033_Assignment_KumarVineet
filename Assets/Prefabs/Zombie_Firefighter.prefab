@@ -4270,6 +4270,7 @@ GameObject:
   - component: {fileID: 6568690217838904393}
   - component: {fileID: 6568690217838904392}
   - component: {fileID: 2703930641672492163}
+  - component: {fileID: -3377355126042091271}
   m_Layer: 0
   m_Name: Zombie_Firefighter
   m_TagString: Untagged
@@ -4393,7 +4394,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.28
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -4414,6 +4415,8 @@ MonoBehaviour:
   zombieAnimator: {fileID: 0}
   zombieStateMachine: {fileID: 0}
   followTarget: {fileID: 0}
+  m_rb: {fileID: 0}
+  isTakingDamage: 0
 --- !u!114 &6568690217838904392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,6 +4443,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 150
   maxHealth: 150
+  HPbeforeDamage: 0
+  isUpdatingHPBar: 0
+--- !u!54 &-3377355126042091271
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570089007076195163}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &6570099110077565637
 GameObject:
   m_ObjectHideFlags: 0

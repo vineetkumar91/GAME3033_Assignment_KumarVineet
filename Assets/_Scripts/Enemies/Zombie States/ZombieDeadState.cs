@@ -15,17 +15,39 @@ public class ZombieDeadState : ZombieStates
     public override void Start()
     {
         base.Start();
-        ownerZombie.zombieNavMesh.isStopped = true;
-        ownerZombie.zombieNavMesh.ResetPath();
+
+        if (ownerZombie.zombieNavMesh.enabled)
+        {
+            ownerZombie.zombieNavMesh.isStopped = true;
+            ownerZombie.zombieNavMesh.ResetPath();
+        }
+
 
         ownerZombie.zombieAnimator.SetFloat(movementZHash, 0);
-        ownerZombie.zombieAnimator.SetBool(isDeadHash, true);
+        
+        
+        ownerZombie.KillZombie(isDeadHash);
+
+        //ownerZombie.zombieAnimator.SetBool(isDeadHash, true);
+
     }
 
     public override void Exit()
     {
         base.Exit();
-        ownerZombie.zombieNavMesh.isStopped = false;
-        ownerZombie.zombieAnimator.SetBool(isDeadHash, false);
+        if (ownerZombie.zombieNavMesh.enabled)
+        {
+            ownerZombie.zombieNavMesh.isStopped = false;
+            ownerZombie.zombieAnimator.SetBool(isDeadHash, false);
+        }
     }
+
+    /// <summary>
+    /// Kill zombie, disable collision, make kinematic, disable zombie states
+    /// </summary>
+    //public void KillZombie()
+    //{
+    //    ownerZombie.m_rb.isKinematic = true;
+    //    ownerZombie.GetComponent<CapsuleCollider>().enabled = false;
+    //}
 }

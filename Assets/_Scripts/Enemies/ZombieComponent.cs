@@ -11,6 +11,9 @@ public class ZombieComponent : MonoBehaviour
     public Animator zombieAnimator;
     public ZombieStateMachine zombieStateMachine;
     public GameObject followTarget;
+    public Rigidbody m_rb;
+
+    public bool isTakingDamage = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,7 @@ public class ZombieComponent : MonoBehaviour
         zombieAnimator = GetComponent<Animator>();
         zombieNavMesh = GetComponent<NavMeshAgent>();
         zombieStateMachine = GetComponent<ZombieStateMachine>();
+        m_rb = GetComponent<Rigidbody>();
 
         followTarget = GameObject.FindGameObjectWithTag("Player");
 
@@ -40,6 +44,46 @@ public class ZombieComponent : MonoBehaviour
         ZombieDeadState deadState = new ZombieDeadState(this, zombieStateMachine);
         zombieStateMachine.AddState(ZombieStateType.IS_DEAD, deadState);
 
+        DisablePhysics();
+
         zombieStateMachine.Initialize(ZombieStateType.FOLLOWING);
+    }
+
+
+    /// <summary>
+    /// Enables physics
+    /// </summary>
+    public void EnablePhysics()
+    {
+        zombieNavMesh.enabled = false;
+        m_rb.isKinematic = false;
+        isTakingDamage = true;
+    }
+
+    /// <summary>
+    /// Disables physics
+    /// </summary>
+    public void DisablePhysics()
+    {
+        zombieNavMesh.enabled = true;
+        m_rb.isKinematic = true;
+    }
+
+    public void KillZombie(int isDeadHash)
+    {
+        StartCoroutine(KillZombieCoroutine(isDeadHash));
+    }
+
+
+    /// <summary>
+    /// Kill zombie, disable collision, make kinematic, disable zombie states
+    /// </summary>
+    IEnumerator KillZombieCoroutine(int isDeadHash)
+    {
+        //yield return new WaitForSeconds(2f);
+        zombieAnimator.SetBool(isDeadHash, true);
+        yield return new WaitForSeconds(3f);
+        m_rb.isKinematic = true;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
 }
