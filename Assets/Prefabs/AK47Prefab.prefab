@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gripLocation: {fileID: 3379706273350218058}
   weaponStats:
+    weaponType: 0
     weaponName: AK-47
     damage: 35
     bulletsInClip: 30
@@ -59,6 +60,7 @@ MonoBehaviour:
       m_Bits: 4294967295
     firingPattern: 1
     totalBullets: 500
+    weaponIcon: {fileID: 0}
   isFiring: 0
   isReloading: 0
   firingEffect: {fileID: 2363796402071256222}
@@ -452,7 +454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6354015927992985896
 Transform:
   m_ObjectHideFlags: 0

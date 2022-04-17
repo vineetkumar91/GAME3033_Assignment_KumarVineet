@@ -642,7 +642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &620430364573838166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -721,6 +721,8 @@ MonoBehaviour:
   TMP_currentHP: {fileID: 620430365963553451}
   TMP_maxHP: {fileID: 620430366114849399}
   HPBar: {fileID: 973818465}
+  HPbar: {fileID: 0}
+  LerpSpeed: 1
 --- !u!1 &620430364740146539
 GameObject:
   m_ObjectHideFlags: 0
