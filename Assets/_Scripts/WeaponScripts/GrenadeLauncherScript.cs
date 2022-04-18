@@ -47,7 +47,7 @@ public class GrenadeLauncherScript : WeaponComponent
                 projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
 
             }
-
+            PlayerSounds.GetInstance().audioSource.volume = 0.5f;
             PlayerSounds.GetInstance().audioSource.clip =
                 PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.GrenadeLaunch];
 

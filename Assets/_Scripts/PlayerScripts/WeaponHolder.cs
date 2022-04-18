@@ -214,6 +214,23 @@ public class WeaponHolder : MonoBehaviour
             return;
         }
 
+        if (equippedWeapon.weaponStats.weaponName == "AK-47")
+        {
+            PlayerSounds.GetInstance().audioSource.volume = 0.5f;
+            PlayerSounds.GetInstance().audioSource.clip =
+                PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.Reload];
+            PlayerSounds.GetInstance().audioSource.Play();
+        }
+        else
+        {
+            PlayerSounds.GetInstance().audioSource.volume = 0.05f;
+            PlayerSounds.GetInstance().audioSource.clip =
+                PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.Reload];
+            PlayerSounds.GetInstance().audioSource.Play();
+        }
+
+        
+
         // Animator
         animator.SetBool(isReloadingHash, true);
         equippedWeapon.StartReloading();

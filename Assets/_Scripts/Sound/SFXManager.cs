@@ -31,6 +31,7 @@ public class SFXManager : MonoBehaviour
     /// </summary>
     public void PlayButtonClick()
     {
+        audioSource.volume = 0.7f;
         audioSource.clip = buttonClick;
         audioSource.Play();
     }

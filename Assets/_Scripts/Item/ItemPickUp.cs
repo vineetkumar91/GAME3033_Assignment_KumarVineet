@@ -124,6 +124,10 @@ public class ItemPickUp : MonoBehaviour
             GameManager.GetInstance().PromptUser("medikit");
         }
 
+        SFXManager.GetInstance().audioSource.clip = PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.Pickup];
+        SFXManager.GetInstance().audioSource.volume = 0.5f;
+        SFXManager.GetInstance().audioSource.Play();
+
         Destroy(gameObject);
     }
 }

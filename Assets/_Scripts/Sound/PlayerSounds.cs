@@ -7,11 +7,11 @@ public enum PlayerSFX
 {
     WeaponFire,
     GrenadeLaunch,
-    GrenadeExplode,
     Hurt,
     Dead,
     Reload,
-    Medikit
+    Medikit,
+    Pickup
 }
 
 public class PlayerSounds : MonoBehaviour

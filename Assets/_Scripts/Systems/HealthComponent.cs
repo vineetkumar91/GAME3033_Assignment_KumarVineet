@@ -30,7 +30,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage)
     {
-        if (GetComponent<PlayerController>() && !GameManager.GetInstance().isPlayerDead)
+        if (GetComponent<PlayerController>() && !GameManager.GetInstance().isPlayerDead && damage < 0)
         {
             SFXManager.GetInstance().audioSource.clip = PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.Hurt];
             SFXManager.GetInstance().audioSource.volume = 0.5f;

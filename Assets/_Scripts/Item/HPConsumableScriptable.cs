@@ -18,6 +18,10 @@ public class HPConsumableScriptable : ConsumableScriptable
         else
         {
             playerController.healthComponent.TakeDamage(effect);
+            PlayerSounds.GetInstance().audioSource.volume = 0.5f;
+            PlayerSounds.GetInstance().audioSource.clip =
+                PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.Medikit];
+            PlayerSounds.GetInstance().audioSource.Play();
         }
 
         base.UseItem(playerController);
