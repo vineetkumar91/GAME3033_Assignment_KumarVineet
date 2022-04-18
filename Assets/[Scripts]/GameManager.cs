@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     public void Awake()
     {
         Instance = this;
+        EnableCursor(false);
     }
 
 
