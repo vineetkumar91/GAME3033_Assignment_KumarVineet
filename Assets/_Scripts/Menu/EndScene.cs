@@ -11,12 +11,13 @@ public class EndScene : MonoBehaviour
     public TextMeshProUGUI TMP_GameStats;
     public Color winColor;
     public Color loseColor;
-
+    public TextMeshProUGUI TMP_Score;
     private void Start()
     {
         // Cursor
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        TMP_Score.text = "SCORE:" + Data.score;
 
         if (Data.hasWon)
         {
