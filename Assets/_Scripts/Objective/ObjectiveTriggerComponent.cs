@@ -25,7 +25,7 @@ public class ObjectiveTriggerComponent : MonoBehaviour
             else if (gameObject.name.Equals("Objective4"))
             {
                 Data.hasWon = true;
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene((int)Scenes.END_SCENE);
             }
         }
     }

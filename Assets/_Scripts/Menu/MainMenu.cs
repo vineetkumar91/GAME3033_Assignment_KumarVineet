@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public enum Scenes
 {
     START_SCENE,
+    MENU_SCENE,
     GAME_SCENE,
     END_SCENE,
     TOTAL_SCENES
@@ -50,7 +51,7 @@ public class MainMenu : MonoBehaviour
     public void Button_OnStartGamePressed()
     {
         Data.Reset();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene((int)Scenes.GAME_SCENE);
     }
 
     /// <summary>

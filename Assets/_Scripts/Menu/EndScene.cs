@@ -37,7 +37,7 @@ public class EndScene : MonoBehaviour
     /// </summary>
     public void Button_OnStartGamePressed()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene((int)Scenes.GAME_SCENE);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class EndScene : MonoBehaviour
     /// </summary>
     public void Button_OnMainMenuPressed()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene((int)Scenes.MENU_SCENE);
     }
 
     /// <summary>

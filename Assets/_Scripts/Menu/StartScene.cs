@@ -35,7 +35,7 @@ public class StartScene : MonoBehaviour
         if (m_ButtonPressed && !isNarrationOn)
         {
             StopAllCoroutines();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene((int)Scenes.MENU_SCENE);
         }
     }
 

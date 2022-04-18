@@ -238,6 +238,6 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
 
         fadeToBlack.color = new Color(fadeToBlack.color.r, fadeToBlack.color.g, fadeToBlack.color.b, 1f);
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene((int)Scenes.END_SCENE);
     }
 }
