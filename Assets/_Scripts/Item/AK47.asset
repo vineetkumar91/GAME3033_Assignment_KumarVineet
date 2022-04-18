@@ -17,7 +17,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 6138427679182937677, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
   isStackable: 0
   maxSize: 30
-  amountValue: 20
+  amountValue: 30
   iconImage: {fileID: 21300000, guid: b82960c35d7852241a9b746adc786d08, type: 3}
   weaponStats:
     weaponType: 2
@@ -33,5 +33,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4294967295
     firingPattern: 1
-    totalBullets: 100
+    totalBullets: 120
+    bulletsRemaining: 0
     weaponIcon: {fileID: 0}
