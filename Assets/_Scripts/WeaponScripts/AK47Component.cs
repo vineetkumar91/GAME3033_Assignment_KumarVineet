@@ -38,6 +38,11 @@ public class AK47Component : WeaponComponent
 
             //Debug.Log("Bullet Count = " + weaponStats.bulletsInClip);
 
+            PlayerSounds.GetInstance().audioSource.clip =
+                PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.WeaponFire];
+
+            PlayerSounds.GetInstance().audioSource.Play();
+
         }
         else if (weaponStats.bulletsInClip <= 0)
         {

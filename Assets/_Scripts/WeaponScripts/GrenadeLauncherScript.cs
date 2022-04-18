@@ -48,6 +48,11 @@ public class GrenadeLauncherScript : WeaponComponent
 
             }
 
+            PlayerSounds.GetInstance().audioSource.clip =
+                PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.GrenadeLaunch];
+
+            PlayerSounds.GetInstance().audioSource.Play();
+
         }
         else if (weaponStats.bulletsInClip <= 0)
         {

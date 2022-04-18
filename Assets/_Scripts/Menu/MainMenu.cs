@@ -31,18 +31,28 @@ public enum Buttons
     TOTAL_BUTTONS
 }
 
+
+public enum MenuAudioClips
+{
+    ButtonClick,
+}
+
 public class MainMenu : MonoBehaviour
 {
     public GameObject MenuPanel;
     public GameObject InstructionsPanel;
     public GameObject CreditsPanel;
 
+    [Header("Audio")] 
+    private AudioSource audioSource;
+    public List<AudioClip> audioClip;
 
     private void Start()
     {
         MenuPanel.SetActive(true);
         InstructionsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -50,6 +60,8 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Button_OnStartGamePressed()
     {
+        audioSource.clip = audioClip[(int)MenuAudioClips.ButtonClick];
+        audioSource.Play();
         Data.Reset();
         SceneManager.LoadScene((int)Scenes.GAME_SCENE);
     }
@@ -59,6 +71,8 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Button_OnInstructionsPressed()
     {
+        audioSource.clip = audioClip[(int)MenuAudioClips.ButtonClick];
+        audioSource.Play();
         MenuPanel.SetActive(false);
         InstructionsPanel.SetActive(true);
         CreditsPanel.SetActive(false);
@@ -69,6 +83,8 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Button_OnCreditsPressed()
     {
+        audioSource.clip = audioClip[(int)MenuAudioClips.ButtonClick];
+        audioSource.Play();
         MenuPanel.SetActive(false);
         InstructionsPanel.SetActive(false);
         CreditsPanel.SetActive(true);
@@ -79,8 +95,10 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Button_OnExitPressed()
     {
+        audioSource.clip = audioClip[(int)MenuAudioClips.ButtonClick];
+        audioSource.Play();
         #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #else
                 Application.Quit();
         #endif
@@ -91,6 +109,8 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Button_OnBackButtonPressed()
     {
+        audioSource.clip = audioClip[(int)MenuAudioClips.ButtonClick];
+        audioSource.Play();
         MenuPanel.SetActive(true);
         InstructionsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
