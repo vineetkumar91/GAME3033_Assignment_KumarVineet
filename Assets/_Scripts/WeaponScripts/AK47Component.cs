@@ -52,14 +52,21 @@ public class AK47Component : WeaponComponent
 
     void DealDamage(RaycastHit hitInfo)
     {
-        IDamageable damageable = hitInfo.collider.gameObject.GetComponent<IDamageable>();
-        damageable?.TakeDamage(weaponStats.damage);
+        // Does not affect the police zombies
+        if (hitInfo.collider.gameObject.CompareTag("Police"))
+        {
+            GameManager.GetInstance().PromptUser("police");
+            return;
+        }
 
         if (hitInfo.collider.gameObject.GetComponent<ZombieComponent>())
         {
             splash = Instantiate(bloodEffect, hitLocation, Quaternion.identity);
             splash.GetComponent<ParticleSystem>().Play();
         }
+
+        IDamageable damageable = hitInfo.collider.gameObject.GetComponent<IDamageable>();
+        damageable?.TakeDamage(weaponStats.damage);
     }
 
     private void OnDrawGizmos()

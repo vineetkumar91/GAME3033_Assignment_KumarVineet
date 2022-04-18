@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Objective
+  - Hazmat
+  - Police
+  - Firefighter
   layers:
   - Default
   - TransparentFX

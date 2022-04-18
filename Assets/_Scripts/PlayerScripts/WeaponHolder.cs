@@ -211,6 +211,7 @@ public class WeaponHolder : MonoBehaviour
         // If out of TOTAL bullets, no point of reloading
         if (equippedWeapon.weaponStats.totalBullets <= 0)
         {
+            GameManager.GetInstance().PromptUser("outofammo");
             return;
         }
 

@@ -11,6 +11,10 @@ public class ZombieSpawner : MonoBehaviour
 
     private GameObject followTargetGameObject;
 
+    private bool wave2Spawn = false;
+    private bool wave3Spawn = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,7 @@ public class ZombieSpawner : MonoBehaviour
             SpawnZombie();
         }
 
+        StartCoroutine(SpawnZombieWaves());
     }
 
 
@@ -35,9 +40,27 @@ public class ZombieSpawner : MonoBehaviour
             return;
         }
 
-        // Instantite the random zombie at the random spawn volume
+        // Instantiate the random zombie at the random spawn volume
         GameObject zombie = Instantiate(zombieToSpawn, spawnVolume.GetPositionInBounds(), spawnVolume.transform.rotation);
 
         zombie.GetComponent<ZombieComponent>().followTarget = followTargetGameObject;
     }
+
+
+    IEnumerator SpawnZombieWaves()
+    {
+        yield return new WaitForSeconds(61f);
+        GameManager.GetInstance().PromptUser("wave2");
+        for (int i = 0; i < numberOfZombiesToSpawn - 4; i++)
+        {
+            SpawnZombie();
+        }
+        yield return new WaitForSeconds(61f);
+        GameManager.GetInstance().PromptUser("wave3");
+        for (int i = 0; i < numberOfZombiesToSpawn - 6; i++)
+        {
+            SpawnZombie();
+        }
+    }
+
 }
