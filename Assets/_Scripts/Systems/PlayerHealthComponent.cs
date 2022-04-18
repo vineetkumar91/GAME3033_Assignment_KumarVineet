@@ -14,13 +14,14 @@ public class PlayerHealthComponent : HealthComponent
     public override void Destroy()
     {
         GetComponent<MovementComponent>().PlayerIsDead();
-        
-        if (GetComponent<PlayerController>() && !GameManager.GetInstance().isPlayerDead)
+
+        if (GetComponent<PlayerController>())
         {
             SFXManager.GetInstance().audioSource.clip = PlayerSounds.GetInstance().audioClip[(int)PlayerSFX.Dead];
-            SFXManager.GetInstance().audioSource.volume = 0.7f;
+            SFXManager.GetInstance().audioSource.volume = 0.5f;
             SFXManager.GetInstance().audioSource.Play();
         }
+
 
         Debug.Log("Player is dead");
         Data.hasWon = false;

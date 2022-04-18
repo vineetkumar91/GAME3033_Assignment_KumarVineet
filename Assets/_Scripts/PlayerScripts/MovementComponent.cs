@@ -236,6 +236,7 @@ public class MovementComponent : MonoBehaviour
             GetComponent<WeaponHolder>().PlayerIsDead();
             _playerAnimator.SetBool(isDeadHash, true);
             StartCoroutine(GameManager.GetInstance().FadeToBlackCoroutine());
+
         }
         
     }

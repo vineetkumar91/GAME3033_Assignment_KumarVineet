@@ -16,6 +16,11 @@ public class ZombieComponent : MonoBehaviour
     public bool isTakingDamage = false;
     private bool executeOnce = false;
 
+    private float attackRange = 2.2f;
+
+    // interface for damageable object here
+    private IDamageable damageableObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +53,8 @@ public class ZombieComponent : MonoBehaviour
         DisablePhysics();
 
         zombieStateMachine.Initialize(ZombieStateType.FOLLOWING);
+
+        damageableObject = followTarget.GetComponent<IDamageable>();
     }
 
 
@@ -92,5 +99,21 @@ public class ZombieComponent : MonoBehaviour
         m_rb.isKinematic = true;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         
+    }
+
+
+    /// <summary>
+    /// public function for animation call
+    /// if in range, then only takes damage
+    /// </summary>
+    public void GiveDamage()
+    {
+        float distanceBetween = Vector3.Distance(transform.position, followTarget.transform.position);
+
+        if (distanceBetween <= attackRange)
+        {
+            // Deal damage
+            damageableObject.TakeDamage(zombieDamage);
+        }
     }
 }

@@ -44,7 +44,14 @@ public class ZombieFollowState : ZombieStates
         float moveZ = (ownerZombie.zombieNavMesh.velocity.normalized.z != 0) ? 1 : 0;
         ownerZombie.zombieAnimator.SetFloat(movementZHash, moveZ);
 
+        if (GameManager.GetInstance().isPlayerDead)
+        {
+            ZombieStateMachine.ChangeState(ZombieStateType.IDLING);
+            return;
+        }
+
         float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
+
 
         if (distanceBetween < stoppingDistance)
         {
