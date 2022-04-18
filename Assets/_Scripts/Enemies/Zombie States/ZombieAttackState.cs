@@ -32,6 +32,8 @@ public class ZombieAttackState : ZombieStates
 
         ownerZombie.zombieAnimator.SetFloat(movementZHash, 0);
         ownerZombie.zombieAnimator.SetBool(isAttackingHash, true);
+
+        ownerZombie.zombieSounds.PlaySound(ZombieSound.ATTACK);
     }
 
     public override void IntervalUpdate()

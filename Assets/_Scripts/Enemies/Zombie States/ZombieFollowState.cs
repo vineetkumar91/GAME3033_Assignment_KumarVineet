@@ -34,6 +34,18 @@ public class ZombieFollowState : ZombieStates
         if (!ownerZombie.isTakingDamage)
         {
             ownerZombie.zombieNavMesh.SetDestination(followTarget.transform.position);
+
+            int number = Random.Range(0, 101);
+
+            if (number >= 80 && number < 90)
+            {
+                ownerZombie.zombieSounds.PlaySound(ZombieSound.BASIC);
+            }
+            else if (number >= 90 && number <= 100)
+
+            {
+                ownerZombie.zombieSounds.PlaySound(ZombieSound.BASIC2);
+            }
         }
     }
 

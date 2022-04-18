@@ -46,6 +46,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void Button_OnResumePressed()
     {
+        SFXManager.GetInstance().PlayButtonClick();
         Time.timeScale = 1f;
         GameManager.GetInstance().isPaused = false;
         EnablePausePanel(false);
@@ -56,6 +57,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void Button_OnRestartGamePressed()
     {
+        SFXManager.GetInstance().PlayButtonClick();
         Time.timeScale = 1f;
         Data.Reset();
         SceneManager.LoadScene((int)Scenes.GAME_SCENE);
@@ -66,6 +68,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void Button_OnMainMenuPressed()
     {
+        SFXManager.GetInstance().PlayButtonClick();
         Time.timeScale = 1f;
         SceneManager.LoadScene((int)Scenes.MENU_SCENE);
     }
@@ -75,8 +78,9 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void Button_OnExitPressed()
     {
+        SFXManager.GetInstance().PlayButtonClick();
         #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #else
                 Application.Quit();
         #endif

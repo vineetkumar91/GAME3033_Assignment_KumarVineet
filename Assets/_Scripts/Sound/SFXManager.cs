@@ -7,6 +7,8 @@ public class SFXManager : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
 
+    public AudioClip buttonClick;
+
     private static SFXManager _instance;
     public static SFXManager GetInstance()
     {
@@ -22,5 +24,14 @@ public class SFXManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    /// <summary>
+    /// Play button clicks
+    /// </summary>
+    public void PlayButtonClick()
+    {
+        audioSource.clip = buttonClick;
+        audioSource.Play();
     }
 }

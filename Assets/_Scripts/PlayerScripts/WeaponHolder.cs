@@ -160,6 +160,11 @@ public class WeaponHolder : MonoBehaviour
     {
         if (!equippedWeapon) return;
 
+        if (_playerController.isInventoryOn)
+        {
+            return;
+        }
+
         if (equippedWeapon.weaponStats.bulletsInClip <= 0)
         {
             StartReloading();

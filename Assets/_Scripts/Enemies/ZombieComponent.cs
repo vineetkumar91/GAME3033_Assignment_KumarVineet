@@ -12,6 +12,7 @@ public class ZombieComponent : MonoBehaviour
     public ZombieStateMachine zombieStateMachine;
     public GameObject followTarget;
     public Rigidbody m_rb;
+    public ZombieSounds zombieSounds;
 
     public bool isTakingDamage = false;
     private bool executeOnce = false;
@@ -28,7 +29,7 @@ public class ZombieComponent : MonoBehaviour
         zombieNavMesh = GetComponent<NavMeshAgent>();
         zombieStateMachine = GetComponent<ZombieStateMachine>();
         m_rb = GetComponent<Rigidbody>();
-
+        zombieSounds = GetComponent<ZombieSounds>();
         followTarget = GameObject.FindGameObjectWithTag("Player");
 
         Initialize(followTarget);
@@ -83,6 +84,12 @@ public class ZombieComponent : MonoBehaviour
         if (!executeOnce)
         {
             executeOnce = true;
+
+            int roll = Random.Range(0, 11);
+            if (roll > 7)
+            {
+                zombieSounds.PlaySound(ZombieSound.FEMALE);
+            }
             GameManager.GetInstance().AddScore(10);
         }
     }
@@ -108,6 +115,11 @@ public class ZombieComponent : MonoBehaviour
     /// </summary>
     public void GiveDamage()
     {
+        if (GameManager.GetInstance().isPlayerDead)
+        {
+            return;
+        }
+
         float distanceBetween = Vector3.Distance(transform.position, followTarget.transform.position);
 
         if (distanceBetween <= attackRange)
