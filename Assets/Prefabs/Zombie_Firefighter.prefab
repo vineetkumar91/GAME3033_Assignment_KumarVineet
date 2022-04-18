@@ -4444,8 +4444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a04f0620cec0bd4a9b891933742a07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 150
-  maxHealth: 150
+  currentHealth: 200
+  maxHealth: 200
   HPbeforeDamage: 0
   isUpdatingHPBar: 0
 --- !u!54 &-3377355126042091271
