@@ -81,7 +81,7 @@ public class WeaponComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Ammo = " + weaponStats.bulletsInClip + weaponStats.totalBullets);
+        
     }
 
     /// <summary>

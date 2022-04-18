@@ -102,7 +102,7 @@ public class Projectile : WeaponComponent
 
                     DealDamage(objectsInRange[i].gameObject);
 
-                    Debug.Log("Kabooom " + objectsInRange[i].name);
+                    //Debug.Log("Kabooom " + objectsInRange[i].name);
                 }
             }
         }

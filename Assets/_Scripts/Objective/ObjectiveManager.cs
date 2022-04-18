@@ -37,7 +37,7 @@ public class ObjectiveManager : MonoBehaviour
         currentObjectiveNumber = objectiveNumber;
 
         TMP_CurrentObjective.text = Objectives[objectiveNumber];
-
+        
         switch (objectiveNumber)
         {
             case 1:

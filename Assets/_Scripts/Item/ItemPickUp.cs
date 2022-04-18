@@ -75,21 +75,39 @@ public class ItemPickUp : MonoBehaviour
                 WeaponStats tempWeaponStats = weaponHolder.weaponAmmoDictionary[tempWeaponData.weaponStats.weaponType];
                 tempWeaponStats.totalBullets += itemInstance.amountValue;
 
-                Debug.Log("Weapon Stats of " + tempWeaponStats.weaponName + " = " + tempWeaponStats.totalBullets);
-
                 weaponHolder.weaponAmmoDictionary[tempWeaponData.weaponStats.weaponType] = tempWeaponStats;
                 if (weaponHolder.GetEquippedWeapon != null)
                 {
                     weaponHolder.GetEquippedWeapon.weaponStats = weaponHolder.weaponAmmoDictionary[tempWeaponStats.weaponType];
                 }
 
-                GameManager.GetInstance().PromptUser("ammo");
+                switch (tempWeaponStats.weaponType)
+                {
+                    case WeaponType.MachineGun:
+                        GameManager.GetInstance().PromptUser("ammo");
+                        break;
+
+                    case WeaponType.Launcher:
+                        GameManager.GetInstance().PromptUser("nade");
+                        break;
+                }
+
+                
             }
             else
             {
                 weaponHolder.weaponAmmoDictionary.Add(tempWeaponData.weaponStats.weaponType, tempWeaponData.weaponStats);
 
-                GameManager.GetInstance().PromptUser("ak47");
+                switch (tempWeaponData.weaponStats.weaponType)
+                {
+                    case WeaponType.MachineGun:
+                        GameManager.GetInstance().PromptUser("ak47");
+                        break;
+
+                    case WeaponType.Launcher:
+                        GameManager.GetInstance().PromptUser("launcher");
+                        break;
+                }
             }
 
         }
@@ -98,6 +116,12 @@ public class ItemPickUp : MonoBehaviour
         {
             Debug.Log("Got c4");
             GameManager.GetInstance().PromptUser("c4");
+        }
+
+
+        if (itemInstance.itemCategory == ItemCategory.CONSUMABLE)
+        {
+            GameManager.GetInstance().PromptUser("medikit");
         }
 
         Destroy(gameObject);

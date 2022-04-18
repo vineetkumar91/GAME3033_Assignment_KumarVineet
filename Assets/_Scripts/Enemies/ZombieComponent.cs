@@ -14,6 +14,7 @@ public class ZombieComponent : MonoBehaviour
     public Rigidbody m_rb;
 
     public bool isTakingDamage = false;
+    private bool executeOnce = false;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,11 @@ public class ZombieComponent : MonoBehaviour
     public void KillZombie(int isDeadHash)
     {
         StartCoroutine(KillZombieCoroutine(isDeadHash));
+        if (!executeOnce)
+        {
+            executeOnce = true;
+            GameManager.GetInstance().AddScore(10);
+        }
     }
 
 
@@ -85,5 +91,6 @@ public class ZombieComponent : MonoBehaviour
         yield return new WaitForSeconds(3f);
         m_rb.isKinematic = true;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        
     }
 }

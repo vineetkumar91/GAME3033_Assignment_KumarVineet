@@ -40,6 +40,20 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     public bool isPlayerDead = false;
     public Image fadeToBlack;
     public float duration = 2f;
+    private bool executeOnce = false;
+
+    [Header("Timer")]
+    public TextMeshProUGUI TMP_Timer;
+    public float timer = 0f;
+    public float timerCounter = 0f;
+    public float maxTime = 0f;
+
+    public TextMeshProUGUI TMP_ZombieWaveTimerLabel;
+    public TextMeshProUGUI TMP_ZombieTimer;
+
+    [Header("Timer")] 
+    public int score;
+    public TextMeshProUGUI TMP_Score;
 
     public static GameManager GetInstance()
     {
@@ -49,7 +63,68 @@ public class GameManager : MonoBehaviour //Singleton<GameManager>
     public void Awake()
     {
         Instance = this;
-        
+    }
+
+
+    /// <summary>
+    /// Game manager update function
+    /// </summary>
+    private void Update()
+    {
+        if (!isPaused && !isPlayerDead)
+        {
+            // Time runs out
+            if (maxTime <= 0f)
+            {
+                maxTime = 0f;
+                if (!executeOnce)
+                {
+                    executeOnce = true;
+                    Data.hasWon = false;
+                    StartCoroutine(FadeToBlackCoroutine());
+                    TMP_Timer.text = "0:00";
+                }
+            }
+            else
+            {
+                maxTime -= Time.deltaTime;
+
+                int minutes = Mathf.FloorToInt(maxTime / 60f);
+                int seconds = Mathf.FloorToInt(maxTime - minutes * 60);
+                string time = string.Format("{0:0}:{1:00}", minutes, seconds);
+                TMP_Timer.text = time;
+            }
+
+            // Zombie timer
+            if (maxTime <= 130f && maxTime > 120f)
+            {
+                TMP_ZombieWaveTimerLabel.text = "Wave 2 In:";
+                TMP_ZombieTimer.text = ((int)(maxTime - 120f)).ToString();
+            }
+            else if (maxTime <= 70f && maxTime > 60f)
+            {
+                TMP_ZombieWaveTimerLabel.text = "Wave 3 In:";
+                TMP_ZombieTimer.text = ((int)(maxTime - 60f)).ToString();
+            }
+            else
+            {
+                TMP_ZombieWaveTimerLabel.text = "";
+                TMP_ZombieTimer.text = "";
+            }
+        }
+    }
+
+
+
+    /// <summary>
+    /// Score
+    /// </summary>
+    /// <param name="addScore"></param>
+    public void AddScore(int addScore)
+    {
+        score += addScore;
+        Data.score = score;
+        TMP_Score.text = score.ToString();
     }
 
     private void Start()

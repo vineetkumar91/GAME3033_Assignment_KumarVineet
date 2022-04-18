@@ -29,7 +29,7 @@ public class ZombieDeadState : ZombieStates
         ownerZombie.KillZombie(isDeadHash);
 
         //ownerZombie.zombieAnimator.SetBool(isDeadHash, true);
-
+        
     }
 
     public override void Exit()

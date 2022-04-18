@@ -23,7 +23,7 @@ public class DetonateTruck : MonoBehaviour
     /// </summary>
     public void StartDetonation(PlayerController playerController)
     {
-        Debug.Log("Starting Detonation");
+        //Debug.Log("Starting Detonation");
 
         isExecuteOnce = true;
         playerController.weaponHolder.UnEquipC4();
