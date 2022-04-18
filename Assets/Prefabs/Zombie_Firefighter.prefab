@@ -4412,7 +4412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd03cc05a1a9d424aa9d97c505ae0e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieDamage: -50
+  zombieDamage: -75
   zombieNavMesh: {fileID: 0}
   zombieAnimator: {fileID: 0}
   zombieStateMachine: {fileID: 0}

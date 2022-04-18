@@ -17,7 +17,7 @@ public class ZombieComponent : MonoBehaviour
     public bool isTakingDamage = false;
     private bool executeOnce = false;
 
-    private float attackRange = 2.2f;
+    private float attackRange = 4f;
 
     // interface for damageable object here
     private IDamageable damageableObject;
