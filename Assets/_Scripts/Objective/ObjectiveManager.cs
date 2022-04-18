@@ -115,4 +115,12 @@ public class ObjectiveManager : MonoBehaviour
     {
         Truck.GetComponent<DetonateTruck>().StartDetonation(playerController);
     }
+
+    /// <summary>
+    /// Play audio sound
+    /// </summary>
+    public void PlayObjectiveSound()
+    {
+        GetComponent<AudioSource>().Play();
+    }
 }

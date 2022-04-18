@@ -10,13 +10,16 @@ public class ObjectiveTriggerComponent : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+           
             if (gameObject.name.Equals("Objective0"))
             {
                 ObjectiveManager.GetInstance().TriggerObjective(1);
+                ObjectiveManager.GetInstance().PlayObjectiveSound();
             }
             else if (gameObject.name.Equals("Objective1"))
             {
                 ObjectiveManager.GetInstance().TriggerObjective(2);
+                ObjectiveManager.GetInstance().PlayObjectiveSound();
             }
             else if (gameObject.name.Equals("Objective2"))
             {
