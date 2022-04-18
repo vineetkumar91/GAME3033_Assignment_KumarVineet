@@ -38,6 +38,7 @@ public class EndScene : MonoBehaviour
     /// </summary>
     public void Button_OnStartGamePressed()
     {
+        GetComponent<AudioSource>().Play();
         SceneManager.LoadScene((int)Scenes.GAME_SCENE);
     }
 
@@ -46,6 +47,7 @@ public class EndScene : MonoBehaviour
     /// </summary>
     public void Button_OnMainMenuPressed()
     {
+        GetComponent<AudioSource>().Play();
         SceneManager.LoadScene((int)Scenes.MENU_SCENE);
     }
 
@@ -54,8 +56,9 @@ public class EndScene : MonoBehaviour
     /// </summary>
     public void Button_OnExitPressed()
     {
+        GetComponent<AudioSource>().Play();
         #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #else
                 Application.Quit();
         #endif
